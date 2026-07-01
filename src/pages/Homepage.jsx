@@ -20,6 +20,7 @@ const useToast = () => useContext(ToastContext);
 
 function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
+
   const showToast = useCallback((message, type = "success") => {
     const id = Date.now();
     setToasts((t) => [...t, { id, message, type }]);
@@ -64,9 +65,11 @@ export const useTheme = () => useContext(ThemeContext);
 
 function ThemeProvider({ children }) {
   const [dark, setDark] = useState(true);
+
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
+
   return (
     <ThemeContext.Provider value={{ dark, setDark }}>
       {children}
@@ -78,6 +81,7 @@ function ThemeProvider({ children }) {
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 z-[100] origin-left"
@@ -111,6 +115,7 @@ function Hero({ onOrderClick }) {
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 6, repeat: Infinity }}
       />
+
       <motion.div
         style={{ y: y2 }}
         className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-red-500/15 rounded-full blur-[100px]"
@@ -260,16 +265,19 @@ function Hero({ onOrderClick }) {
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full border border-orange-500/10"
           />
+
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="absolute w-64 h-64 lg:w-96 lg:h-96 rounded-full border border-orange-500/15"
           />
+
           <motion.div
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
             className="absolute w-72 h-72 lg:w-[420px] lg:h-[420px] bg-gradient-to-br from-orange-600/40 via-red-600/25 to-amber-500/30 rounded-full blur-3xl"
           />
+
           <motion.div
             animate={{ y: [0, -15, 0], rotateZ: [0, 2, 0, -2, 0] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -278,6 +286,7 @@ function Hero({ onOrderClick }) {
           >
             <img src={monday} alt="Premium Akara" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-orange-950/60 via-transparent to-transparent" />
+
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
               <div className="bg-black/50 backdrop-blur-md rounded-xl px-3 py-1.5 border border-white/10">
                 <span className="text-orange-400 text-xs font-bold">⭐ 4.9 Rating</span>
@@ -326,12 +335,14 @@ function SectionHeader({ badge, title, highlight, sub, dark = false }) {
       <div className={`inline-flex items-center gap-2 ${dark ? "bg-white/5 border-white/10" : "bg-orange-50 border-orange-200"} border rounded-full px-4 py-1.5 mb-4`}>
         <span className={`${dark ? "text-orange-400" : "text-orange-600"} text-sm font-semibold`}>{badge}</span>
       </div>
+
       <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight ${dark ? "text-white" : "text-gray-900"}`}>
         {title}{" "}
         <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
           {highlight}
         </span>
       </h2>
+
       {sub && (
         <p className={`${dark ? "text-white/50" : "text-gray-500"} mt-4 text-base sm:text-lg max-w-xl mx-auto`}>
           {sub}
@@ -376,11 +387,13 @@ function ProductSection({ cart, setCart }) {
   const decrement = () => {
     setCart((c) => {
       const current = c[AKARA_PRODUCT.id]?.qty || 0;
+
       if (current <= 1) {
         const next = { ...c };
         delete next[AKARA_PRODUCT.id];
         return next;
       }
+
       return {
         ...c,
         [AKARA_PRODUCT.id]: { ...AKARA_PRODUCT, qty: current - 1 },
@@ -428,11 +441,13 @@ function ProductSection({ cart, setCart }) {
               <span className="absolute top-4 left-4 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                 🔥 Fresh & Hot
               </span>
+
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                 <div className="bg-black/50 backdrop-blur-md rounded-lg px-3 py-1.5 flex items-center gap-1">
                   <span className="text-yellow-400">⭐</span>
                   <span className="text-white text-sm font-bold">4.9</span>
                 </div>
+
                 <div className="bg-black/50 backdrop-blur-md rounded-lg px-3 py-1.5">
                   <span className="text-white text-sm font-bold">⚡ Swift</span>
                 </div>
@@ -445,6 +460,7 @@ function ProductSection({ cart, setCart }) {
                   {AKARA_PRODUCT.name}
                 </h3>
                 <p className="text-gray-500 mt-3 leading-relaxed">{AKARA_PRODUCT.desc}</p>
+
                 <div className="mt-6 flex items-baseline gap-2">
                   <span className="text-gray-400 text-sm">Price per piece:</span>
                   <span className="text-orange-500 font-black text-xl">₦{AKARA_PRODUCT.price}</span>
@@ -553,6 +569,7 @@ function ProductSection({ cart, setCart }) {
                   {g.tag}
                 </span>
               </div>
+
               <div className="p-5">
                 <h3 className="font-black text-gray-900 text-lg leading-tight">{g.name}</h3>
                 <p className="text-gray-500 text-sm mt-2 leading-relaxed">{g.desc}</p>
@@ -584,8 +601,11 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
     setCart((c) => {
       const next = { ...c };
       if (!next[id]) return next;
+
       next[id] = { ...next[id], qty: next[id].qty + delta };
+
       if (next[id].qty <= 0) delete next[id];
+
       return next;
     });
   };
@@ -601,6 +621,7 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
             onClick={onClose}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
           />
+
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -615,6 +636,7 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                   {items.length} item{items.length !== 1 ? "s" : ""}
                 </p>
               </div>
+
               <button
                 onClick={onClose}
                 className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -633,6 +655,7 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                   <div className="text-7xl mb-4">🛒</div>
                   <h4 className="text-xl font-black text-gray-900">Your cart is empty</h4>
                   <p className="text-gray-500 mt-2">Add some delicious akara to get started!</p>
+
                   <button
                     onClick={onClose}
                     className="mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-2xl font-bold"
@@ -653,9 +676,11 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                         className="flex gap-3 p-3 bg-gray-50 rounded-2xl"
                       >
                         <img src={item.img} alt={item.name} className="w-20 h-20 rounded-xl object-cover" />
+
                         <div className="flex-1">
                           <h4 className="font-bold text-gray-900 text-sm">{item.name}</h4>
                           <p className="text-orange-500 font-black text-base">₦{item.price.toLocaleString()}</p>
+
                           <div className="flex items-center gap-2 mt-2">
                             <button
                               onClick={() => update(item.id, -1)}
@@ -663,7 +688,9 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                             >
                               −
                             </button>
+
                             <span className="font-bold text-sm w-6 text-center">{item.qty}</span>
+
                             <button
                               onClick={() => update(item.id, 1)}
                               className="w-7 h-7 rounded-lg bg-white border border-gray-200 font-black text-gray-700 hover:bg-orange-500 hover:text-white hover:border-transparent transition-colors"
@@ -672,6 +699,7 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                             </button>
                           </div>
                         </div>
+
                         <button
                           onClick={() => update(item.id, -item.qty)}
                           className="text-gray-400 hover:text-red-500 transition-colors"
@@ -691,16 +719,19 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                   <span>Subtotal</span>
                   <span className="font-bold">₦{subtotal.toLocaleString()}</span>
                 </div>
+
                 <div className="p-3 bg-blue-50 rounded-xl text-xs text-blue-700 flex items-start gap-2">
                   <span>🚚</span>
                   <span>
                     <strong>Delivery fee</strong> is paid directly to the rider upon arrival.
                   </span>
                 </div>
+
                 <div className="flex justify-between text-lg font-black text-gray-900 pt-3 border-t border-gray-200">
                   <span>Total</span>
                   <span className="text-orange-500">₦{total.toLocaleString()}</span>
                 </div>
+
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -727,14 +758,27 @@ const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 async function sendDeliveryDetailsEmail(form, cart = {}) {
+  console.log("Checking EmailJS config:", {
+    hasServiceId: Boolean(EMAILJS_SERVICE_ID),
+    hasTemplateId: Boolean(EMAILJS_TEMPLATE_ID),
+    hasPublicKey: Boolean(EMAILJS_PUBLIC_KEY),
+  });
+
   if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
     console.warn("EmailJS is not configured — skipping delivery details email.");
-    return;
+
+    return {
+      ok: false,
+      reason: "EmailJS environment variables are missing in production.",
+    };
   }
 
   const items = Object.values(cart);
+
   const orderSummary = items.length
-    ? items.map((i) => `• ${i.name} x${i.qty} — ₦${(i.price * i.qty).toLocaleString()}`).join("\n")
+    ? items
+        .map((i) => `• ${i.name} x${i.qty} — ₦${(i.price * i.qty).toLocaleString()}`)
+        .join("\n")
     : "No items in cart yet";
 
   const totalAmount = items.reduce((s, i) => s + i.price * i.qty, 0);
@@ -757,17 +801,39 @@ async function sendDeliveryDetailsEmail(form, cart = {}) {
           phone: form.phone,
           address: form.address,
           message: fullMessage,
-          time: new Date().toLocaleString("en-NG", { dateStyle: "full", timeStyle: "short" }),
+          time: new Date().toLocaleString("en-NG", {
+            dateStyle: "full",
+            timeStyle: "short",
+          }),
           title: "New Delivery Request",
         },
       }),
     });
 
-    if (!response.ok) throw new Error(await response.text());
+    const responseText = await response.text();
 
-    console.log("Delivery details emailed to business successfully.");
+    if (!response.ok) {
+      console.error("EmailJS API error:", response.status, responseText);
+
+      return {
+        ok: false,
+        reason: responseText || `EmailJS failed with status ${response.status}`,
+      };
+    }
+
+    console.log("Delivery details emailed to business successfully:", responseText);
+
+    return {
+      ok: true,
+      reason: "Delivery email sent successfully.",
+    };
   } catch (err) {
     console.error("Failed to send delivery details email:", err);
+
+    return {
+      ok: false,
+      reason: err?.message || "Unknown EmailJS error.",
+    };
   }
 }
 
@@ -802,7 +868,14 @@ function generatePaystackRef() {
 }
 
 function getPaystackChannels(method) {
-  const map = { card: ["card"], bank_transfer: ["bank_transfer"], ussd: ["ussd"], qr: ["qr"], bank: ["bank"] };
+  const map = {
+    card: ["card"],
+    bank_transfer: ["bank_transfer"],
+    ussd: ["ussd"],
+    qr: ["qr"],
+    bank: ["bank"],
+  };
+
   return map[method] ?? ["card", "bank_transfer", "ussd", "qr"];
 }
 
@@ -879,6 +952,8 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
       },
 
       onSuccess: async (transaction) => {
+        console.log("Paystack payment successful:", transaction);
+
         try {
           await createorderToSupabase({ form, items, total, transaction });
           showToast("Order saved! Your akara is being prepared.");
@@ -887,7 +962,14 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
           showToast("Payment received! Note: order record may need manual review.", "info");
         }
 
-        await sendDeliveryDetailsEmail(form, cart);
+        const emailResult = await sendDeliveryDetailsEmail(form, cart);
+
+        if (emailResult.ok) {
+          showToast("Delivery email sent to business.");
+        } else {
+          console.error("Delivery email was not sent:", emailResult.reason);
+          showToast("Payment successful, but delivery email failed. Check EmailJS config.", "error");
+        }
 
         setLoading(false);
         setSuccess(true);
@@ -931,6 +1013,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
           >
             <div className="p-6 bg-gradient-to-r from-orange-500 to-red-500 text-white relative">
               <button onClick={close} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center">✕</button>
+
               <h2 className="text-2xl font-black">Checkout</h2>
               <p className="text-white/80 text-sm mt-1">Complete your order in 3 easy steps</p>
 
@@ -1005,10 +1088,12 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                       {items.map((i) => (
                         <div key={i.id} className="flex gap-3 p-3 bg-gray-50 rounded-2xl">
                           <img src={i.img} alt={i.name} className="w-16 h-16 rounded-xl object-cover" />
+
                           <div className="flex-1">
                             <p className="font-bold text-gray-900 text-sm">{i.name}</p>
                             <p className="text-xs text-gray-500">Qty: {i.qty}</p>
                           </div>
+
                           <p className="font-black text-orange-500">₦{(i.price * i.qty).toLocaleString()}</p>
                         </div>
                       ))}
@@ -1019,10 +1104,12 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         <span>Subtotal</span>
                         <span className="font-bold">₦{subtotal.toLocaleString()}</span>
                       </div>
+
                       <div className="flex justify-between text-sm text-gray-700">
                         <span>Delivery</span>
                         <span className="font-bold text-blue-600">Paid on Delivery</span>
                       </div>
+
                       <div className="flex justify-between font-black text-lg text-orange-600 pt-2 border-t border-orange-200">
                         <span>Total to Pay Now</span>
                         <span>₦{total.toLocaleString()}</span>
@@ -1078,10 +1165,12 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                               className={`w-full flex items-center gap-4 p-4 rounded-2xl border-2 transition-all text-left ${payMethod === method.id ? "border-orange-500 bg-orange-50" : "border-gray-200 bg-white hover:border-orange-300 hover:bg-orange-50/50"}`}
                             >
                               <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm flex-shrink-0 ${payMethod === method.id ? "bg-orange-500" : "bg-gray-100"}`}>{method.icon}</div>
+
                               <div className="flex-1">
                                 <p className={`font-black text-sm ${payMethod === method.id ? "text-orange-600" : "text-gray-900"}`}>{method.label}</p>
                                 <p className="text-xs text-gray-500 mt-0.5">{method.sub}</p>
                               </div>
+
                               {payMethod === method.id && (
                                 <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-xs font-bold text-white bg-orange-500 px-2.5 py-1 rounded-full flex-shrink-0">Selected</motion.span>
                               )}
@@ -1163,6 +1252,7 @@ function WhyUs() {
               <motion.div whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }} className={`w-14 h-14 rounded-2xl ${f.bg} flex items-center justify-center text-3xl mb-5`}>
                 {f.icon}
               </motion.div>
+
               <h3 className="text-xl font-black text-gray-900 mb-3">{f.title}</h3>
               <p className="text-gray-500 leading-relaxed">{f.desc}</p>
               <motion.div initial={{ width: "3rem" }} whileHover={{ width: "100%" }} className={`mt-5 h-1 rounded-full bg-gradient-to-r ${f.color}`} />
@@ -1195,6 +1285,7 @@ function Testimonials() {
   return (
     <section id="reviews" className="py-20 sm:py-24 bg-gray-950 overflow-hidden relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_50%,rgba(249,115,22,0.15),transparent)]" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
         <SectionHeader badge="⭐ Customer Love" title="What Our" highlight="Customers Say" sub="Over 10,000 happy customers and counting." dark />
 
@@ -1211,7 +1302,9 @@ function Testimonials() {
               <div className="flex gap-1 mb-4">
                 {Array(reviews[index].rating).fill(0).map((_, i) => <span key={i} className="text-orange-400 text-xl">⭐</span>)}
               </div>
+
               <p className="text-white/80 text-lg leading-relaxed mb-6 italic">"{reviews[index].text}"</p>
+
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${reviews[index].color} flex items-center justify-center text-white font-black`}>{reviews[index].avatar}</div>
                 <div>
@@ -1243,7 +1336,9 @@ function Testimonials() {
               <div className="flex gap-0.5 mb-3">
                 {Array(r.rating).fill(0).map((_, j) => <span key={j} className="text-orange-400">⭐</span>)}
               </div>
+
               <p className="text-white/70 text-sm leading-relaxed mb-4">{r.text}</p>
+
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-2xl bg-gradient-to-br ${r.color} flex items-center justify-center text-white text-sm font-black`}>{r.avatar}</div>
                 <div>
@@ -1275,6 +1370,7 @@ function DeliveryProcess() {
 
         <div className="relative">
           <div className="hidden lg:block absolute top-16 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-orange-200 via-orange-400 to-orange-200" />
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }} className="relative text-center group">
@@ -1284,6 +1380,7 @@ function DeliveryProcess() {
                   </motion.div>
                   <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-red-500 text-white text-xs font-black flex items-center justify-center shadow-md">{s.step}</div>
                 </div>
+
                 <h3 className="text-xl font-black text-gray-900 mb-3">{s.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
@@ -1305,6 +1402,7 @@ function DeliveryProcess() {
               </div>
             ))}
           </div>
+
           <div className="mt-6 p-4 bg-gradient-to-r from-orange-50 to-red-50 border border-orange-100 rounded-2xl text-center text-sm text-gray-700">
             ⚡ <strong>Immediate delivery</strong> once payment is received — your akara is on the way!
           </div>
@@ -1351,6 +1449,7 @@ function Contact() {
                 className="flex items-center gap-4 p-5 bg-orange-50 rounded-2xl border border-orange-100"
               >
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-2xl shadow-lg">{c.icon}</div>
+
                 <div>
                   <p className="font-black text-gray-900">{c.title}</p>
                   <p className="text-gray-600 text-sm">{c.text}</p>
