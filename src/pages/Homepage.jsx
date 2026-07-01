@@ -731,12 +731,16 @@ async function sendDeliveryDetailsEmail(form, cart = {}) {
     console.warn("EmailJS is not configured — skipping delivery details email.");
     return;
   }
+
   const items = Object.values(cart);
   const orderSummary = items.length
     ? items.map((i) => `• ${i.name} x${i.qty} — ₦${(i.price * i.qty).toLocaleString()}`).join("\n")
     : "No items in cart yet";
+
   const totalAmount = items.reduce((s, i) => s + i.price * i.qty, 0);
+
   const fullMessage = `ORDER DETAILS:\n${orderSummary}\n\nTotal Amount: ₦${totalAmount.toLocaleString()}\n\nSpecial Instructions:\n${form.note || "None"}`;
+
   try {
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
@@ -746,6 +750,8 @@ async function sendDeliveryDetailsEmail(form, cart = {}) {
         template_id: EMAILJS_TEMPLATE_ID,
         user_id: EMAILJS_PUBLIC_KEY,
         template_params: {
+          name: form.name,
+          fullName: form.name,
           fullname: form.name,
           email: form.email || "Not provided",
           phone: form.phone,
@@ -756,7 +762,9 @@ async function sendDeliveryDetailsEmail(form, cart = {}) {
         },
       }),
     });
+
     if (!response.ok) throw new Error(await response.text());
+
     console.log("Delivery details emailed to business successfully.");
   } catch (err) {
     console.error("Failed to send delivery details email:", err);
@@ -783,7 +791,9 @@ async function createorderToSupabase({ form, items, total, transaction }) {
       paystackReference: transaction.reference,
     }),
   });
+
   if (!response.ok) throw new Error(`Edge function error: ${await response.text()}`);
+
   return response.json();
 }
 
@@ -827,20 +837,24 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
       showToast("Payment gateway not loaded. Please refresh the page.", "error");
       return;
     }
+
     if (!form.email) {
       showToast("Please go back and enter your email address.", "error");
       return;
     }
+
     if (!PAYSTACK_PUBLIC_KEY) {
       showToast("Payment configuration error. Please contact support.", "error");
       return;
     }
+
     if (total < 100) {
       showToast("Minimum order amount is ₦100.", "error");
       return;
     }
 
     setLoading(true);
+
     const reference = generatePaystackRef();
     const popup = new window.PaystackPop();
 
@@ -863,6 +877,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
           { display_name: "Items Ordered", variable_name: "items_ordered", value: items.map((i) => `${i.name} x${i.qty}`).join(", ") },
         ],
       },
+
       onSuccess: async (transaction) => {
         try {
           await createorderToSupabase({ form, items, total, transaction });
@@ -871,15 +886,20 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
           console.error("Failed to save order to Supabase:", err);
           showToast("Payment received! Note: order record may need manual review.", "info");
         }
+
+        await sendDeliveryDetailsEmail(form, cart);
+
         setLoading(false);
         setSuccess(true);
         showToast("Payment successful! Your akara is on the way!");
         setTimeout(() => { setCart({}); close(); }, 3500);
       },
+
       onCancel: () => {
         setLoading(false);
         showToast("Payment was cancelled. Try again when you're ready.", "info");
       },
+
       onError: (error) => {
         setLoading(false);
         console.error("Paystack error:", JSON.stringify(error, null, 2));
@@ -913,6 +933,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
               <button onClick={close} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center">✕</button>
               <h2 className="text-2xl font-black">Checkout</h2>
               <p className="text-white/80 text-sm mt-1">Complete your order in 3 easy steps</p>
+
               <div className="flex items-center gap-2 mt-4">
                 {[1, 2, 3].map((s) => (
                   <div key={s} className="flex-1 flex items-center gap-2">
@@ -922,6 +943,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                     >
                       {success && s === 3 ? "✓" : s}
                     </motion.div>
+
                     {s < 3 && (
                       <div className="flex-1 h-1 rounded-full bg-white/20 overflow-hidden">
                         <motion.div animate={{ width: step > s ? "100%" : "0%" }} className="h-full bg-white" />
@@ -930,6 +952,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                   </div>
                 ))}
               </div>
+
               <div className="flex justify-between text-xs mt-2 text-white/80 font-semibold">
                 <span>Details</span><span>Review</span><span>Payment</span>
               </div>
@@ -940,6 +963,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                 {step === 1 && (
                   <motion.div key="s1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                     <h3 className="text-lg font-black text-gray-900">Delivery Details</h3>
+
                     {[
                       { key: "name", label: "Full Name", type: "text", icon: "👤" },
                       { key: "phone", label: "Phone Number", type: "tel", icon: "📱" },
@@ -957,6 +981,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         />
                       </div>
                     ))}
+
                     <textarea
                       value={form.note}
                       onChange={(e) => setForm({ ...form, note: e.target.value })}
@@ -964,6 +989,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                       rows={3}
                       className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all resize-none"
                     />
+
                     <div className="p-3 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-800 flex items-start gap-2">
                       <span className="text-base">ℹ️</span>
                       <span><strong>Note:</strong> We deliver within Abraka, Delta State. Delivery fee is paid directly to the rider upon arrival.</span>
@@ -974,6 +1000,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                 {step === 2 && (
                   <motion.div key="s2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                     <h3 className="text-lg font-black text-gray-900">Order Summary</h3>
+
                     <div className="space-y-3">
                       {items.map((i) => (
                         <div key={i.id} className="flex gap-3 p-3 bg-gray-50 rounded-2xl">
@@ -986,6 +1013,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         </div>
                       ))}
                     </div>
+
                     <div className="p-4 bg-orange-50 rounded-2xl space-y-2">
                       <div className="flex justify-between text-sm text-gray-700">
                         <span>Subtotal</span>
@@ -1000,9 +1028,11 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         <span>₦{total.toLocaleString()}</span>
                       </div>
                     </div>
+
                     <div className="p-3 bg-blue-50 rounded-2xl text-sm text-blue-700">
                       <strong>Delivering to:</strong> {form.address}
                     </div>
+
                     <div className="p-3 bg-green-50 border border-green-200 rounded-2xl text-xs text-green-800 flex items-start gap-2">
                       <span>⚡</span>
                       <span><strong>Fast & Swift Delivery:</strong> Your akara will be delivered immediately once payment is received.</span>
@@ -1019,6 +1049,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         <p className="text-sm text-gray-500 mt-1">Please don't close this window</p>
                       </div>
                     )}
+
                     {success && (
                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 15 }} className="py-8 text-center">
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1, rotate: 360 }} transition={{ delay: 0.2, type: "spring" }} className="w-24 h-24 mx-auto bg-green-500 rounded-full flex items-center justify-center text-5xl shadow-2xl shadow-green-500/40">✓</motion.div>
@@ -1027,9 +1058,11 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         <p className="text-sm text-orange-500 font-bold mt-3">Fast & swift delivery on the way!</p>
                       </motion.div>
                     )}
+
                     {!loading && !success && (
                       <>
                         <h3 className="text-lg font-black text-gray-900">Choose Payment Method</h3>
+
                         <div className="grid grid-cols-1 gap-3">
                           {[
                             { id: "card", icon: "💳", label: "ATM / Debit Card", sub: "Visa, Mastercard, Verve" },
@@ -1055,6 +1088,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                             </motion.button>
                           ))}
                         </div>
+
                         <div className="p-4 bg-gray-50 rounded-2xl">
                           <div className="flex justify-between font-black text-xl">
                             <span className="text-gray-900">You'll pay</span>
@@ -1062,6 +1096,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                           </div>
                           <p className="text-xs text-gray-500 mt-2">+ Delivery fee paid to rider on arrival</p>
                         </div>
+
                         <div className="text-xs text-gray-500 text-center flex items-center justify-center gap-1">
                           Secured by <span className="font-bold text-gray-700">Paystack</span>. We never store your card details.
                         </div>
@@ -1077,10 +1112,11 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                 {step > 1 && (
                   <button onClick={() => setStep(step - 1)} className="px-6 py-3 rounded-2xl border border-gray-200 font-bold text-gray-700 hover:bg-gray-50">Back</button>
                 )}
+
                 <button
                   onClick={() => {
                     if (step === 3) { handlePay(); }
-                    else if (step === 1) { sendDeliveryDetailsEmail(form, cart); setStep(step + 1); }
+                    else if (step === 1) { setStep(step + 1); }
                     else { setStep(step + 1); }
                   }}
                   disabled={(step === 1 && !canNext1) || (step === 2 && !canNext2)}
@@ -1112,6 +1148,7 @@ function WhyUs() {
     <section id="about" className="py-20 sm:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <SectionHeader badge="💡 Why Us" title="Why Thousands Choose" highlight="Mama Akara" sub="We deliver joy, culture, and memories — not just food." />
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((f, i) => (
             <motion.div
@@ -1149,6 +1186,7 @@ function Testimonials() {
   ];
 
   const [index, setIndex] = useState(0);
+
   useEffect(() => {
     const t = setInterval(() => setIndex((i) => (i + 1) % reviews.length), 4000);
     return () => clearInterval(t);
@@ -1234,6 +1272,7 @@ function DeliveryProcess() {
     <section id="delivery" className="py-20 sm:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <SectionHeader badge="🚀 How It Works" title="Order in" highlight="4 Simple Steps" sub="From your phone to your door — fast and delicious." />
+
         <div className="relative">
           <div className="hidden lg:block absolute top-16 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-orange-200 via-orange-400 to-orange-200" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -1351,6 +1390,7 @@ function Contact() {
               placeholder="Your Name"
               className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all"
             />
+
             <input
               required
               type="email"
@@ -1359,6 +1399,7 @@ function Contact() {
               placeholder="Email Address"
               className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all"
             />
+
             <textarea
               required
               rows={5}
@@ -1367,6 +1408,7 @@ function Contact() {
               placeholder="Your message..."
               className="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-2xl focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all resize-none"
             />
+
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -1384,6 +1426,7 @@ function Contact() {
 // ─── Floating Buttons ─────────────────────────────────────────────────────────
 function FloatingButtons() {
   const [showTop, setShowTop] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 600);
     window.addEventListener("scroll", onScroll);
