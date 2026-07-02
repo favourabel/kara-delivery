@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../pages/ThemeContext";
+import { useTheme } from "../pages/Homepage.jsx";
 
 function Navbar({ onCartClick, cartCount }) {
   const [scrolled, setScrolled] = useState(false);
