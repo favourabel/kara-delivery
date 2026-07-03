@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@akaradelivery.com";
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "AkaraAdmin2024!";
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "";
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "";
 
 const AdminAuthContext = createContext(null);
 
