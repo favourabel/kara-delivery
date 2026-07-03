@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../component/Navbar.jsx";
 import Footer from "../component/Footer.jsx";
 import { useAdminAuth } from "../lib/context/AuthContext.jsx";
-import { Supabase } from "../lib/Supabase.js";
+import { supabase } from "../lib/Supabase.js";
 
 import {
   HiOutlineMail,
