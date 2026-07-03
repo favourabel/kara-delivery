@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAdminAuth } from "../lib/context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/supabase";
+import { Supabase } from "../lib/Supabase.js";
 
 import {
   HiOutlineHome,
