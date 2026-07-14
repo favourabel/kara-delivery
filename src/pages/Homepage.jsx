@@ -20,14 +20,13 @@ import { BiLoader } from "react-icons/bi";
 
 import MAMA from "../assets/MAMA.jpeg";
 import monday from "../assets/monday.jpg";
-import Enjoy from "../assets/Enjoy.jpg";
-import Pap from "../assets/Pap.jpg";
-import Sugar from "../assets/Sugar.jpg";
-import Sweet from "../assets/Sweet.jpg";
 
 export const BUSINESS_EMAIL = "Egileweprecious1@gmail.com";
 export const BUSINESS_PHONE_DISPLAY = "+234 913 283 0290";
 const BUSINESS_WHATSAPP_NUMBER = "2349132830290";
+
+// ─── Takeaway Price ───────────────────────────────────────────────────────────
+const TAKEAWAY_PRICE = 200;
 
 // ─── Toast Context ────────────────────────────────────────────────────────────
 const ToastContext = createContext();
@@ -206,7 +205,7 @@ function AdminLoginPopup({ open, onClose }) {
   );
 }
 
-// ─── Hero Section ─────────────────────────────────────────────────────────────
+// ─── Hero Section (RESTORED to original + combo card BELOW image on the right)
 function Hero({ onOrderClick, onAdminClick }) {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
@@ -215,7 +214,7 @@ function Hero({ onOrderClick, onAdminClick }) {
   const stats = [
     { val: "10k+", label: "Happy Customers" },
     { val: "4.9", label: "Average Rating" },
-    { val: "24/7", label: "Order Ready" },
+    { val: "5 Days", label: "Weekly Service" },
   ];
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-20">
@@ -226,6 +225,7 @@ function Hero({ onOrderClick, onAdminClick }) {
       <motion.div style={{ y: y1 }} className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-[128px]" />
       <motion.div style={{ y: y2 }} className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/8 rounded-full blur-[100px]" />
       <motion.div style={{ opacity }} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+        {/* LEFT — Original hero text */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="flex flex-col gap-7">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 w-fit">
@@ -233,14 +233,14 @@ function Hero({ onOrderClick, onAdminClick }) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
             </span>
-            <span className="text-slate-200 text-xs sm:text-sm font-medium tracking-wide">Fresh Batches Available Now</span>
+            <span className="text-slate-200 text-xs sm:text-sm font-medium tracking-wide">Fresh Batches · Mon, Wed – Sat · 6:30AM – 10:00AM</span>
           </motion.div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.05] tracking-tight">
             Nigeria's{" "}<span className="relative inline-block"><span className="bg-gradient-to-r from-amber-300 via-red-400 to-red-500 bg-clip-text text-transparent">Finest</span></span>{" "}<br />
             Akara,{" "}<span className="text-slate-400 font-light">Delivered Hot</span>
           </h1>
           <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-lg font-light">
-            Crispy on the outside, fluffy on the inside. Handcrafted every morning from premium black-eyed beans — straight to your doorstep.
+            Crispy on the outside, fluffy on the inside. Handcrafted every morning from premium black-eyed beans — fried with pure <span className="text-amber-300 font-medium">groundnut oil</span> (not palm oil) — straight to your doorstep.
           </p>
           <div className="flex gap-8 sm:gap-12 py-2">
             {stats.map((s, i) => (
@@ -266,32 +266,59 @@ function Hero({ onOrderClick, onAdminClick }) {
             </motion.button>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3 }} className="relative flex items-center justify-center">
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full border border-white/5" />
-          <motion.div animate={{ rotate: -360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute w-64 h-64 lg:w-96 lg:h-96 rounded-full border border-white/10" />
-          <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute w-72 h-72 lg:w-[420px] lg:h-[420px] bg-gradient-to-br from-red-600/30 via-amber-500/20 to-red-500/20 rounded-full blur-3xl" />
-          <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10 w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)]">
-            <img src={monday} alt="Premium Akara" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <div className="bg-white/10 backdrop-blur-xl rounded-xl px-3 py-2 border border-white/20">
-                <span className="text-white text-xs font-semibold flex items-center gap-1.5"><span className="text-amber-400">★</span> 4.9 Rating</span>
+
+        {/* RIGHT — Image + Combo Description BELOW the image */}
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3 }} className="relative flex flex-col items-center justify-center gap-6">
+          {/* Image container */}
+          <div className="relative flex items-center justify-center">
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute w-80 h-80 lg:w-[480px] lg:h-[480px] rounded-full border border-white/5" />
+            <motion.div animate={{ rotate: -360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute w-64 h-64 lg:w-96 lg:h-96 rounded-full border border-white/10" />
+            <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute w-72 h-72 lg:w-[420px] lg:h-[420px] bg-gradient-to-br from-red-600/30 via-amber-500/20 to-red-500/20 rounded-full blur-3xl" />
+            <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-[2rem] overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)]">
+              <img src={monday} alt="Premium Akara" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div className="bg-white/10 backdrop-blur-xl rounded-xl px-3 py-2 border border-white/20">
+                  <span className="text-white text-xs font-semibold flex items-center gap-1.5"><span className="text-amber-400">★</span> 4.9 Rating</span>
+                </div>
+                <div className="bg-red-500/90 backdrop-blur-xl rounded-xl px-3 py-2 border border-red-400/30">
+                  <span className="text-white text-xs font-semibold">Hot & Fresh</span>
+                </div>
               </div>
-              <div className="bg-red-500/90 backdrop-blur-xl rounded-xl px-3 py-2 border border-red-400/30">
-                <span className="text-white text-xs font-semibold">Hot & Fresh</span>
-              </div>
+            </motion.div>
+            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-2 -right-2 sm:-top-6 sm:-right-6 bg-white/10 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl">
+              <div className="text-white text-xs font-semibold">Groundnut Oil</div>
+              <div className="text-slate-400 text-[10px] mt-0.5">100% Pure</div>
+            </motion.div>
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 5, repeat: Infinity }}
+              className="absolute -bottom-2 -left-2 sm:-bottom-6 sm:-left-6 bg-white/10 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl">
+              <div className="text-white text-xs font-semibold">Fast Delivery</div>
+              <div className="text-red-400 text-[10px] font-semibold mt-0.5">Swift & Quick</div>
+            </motion.div>
+          </div>
+
+          {/* ─── Hot Student Combo Description — placed BELOW the image ─── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="w-full max-w-md bg-gradient-to-br from-red-600/15 via-amber-500/10 to-red-500/15 backdrop-blur-xl border border-white/15 rounded-2xl p-5 text-center shadow-xl"
+          >
+            <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-400/30 rounded-full px-3 py-1 mb-3">
+              <span className="text-base">🍲</span>
+              <span className="text-red-200 text-[10px] font-bold uppercase tracking-wider">Hot Student Breakfast Combo</span>
             </div>
-          </motion.div>
-          <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity }}
-            className="absolute -top-2 -right-2 sm:-top-6 sm:-right-6 bg-white/10 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl">
-            <div className="text-white text-xs font-semibold">Premium Beans</div>
-            <div className="text-slate-400 text-[10px] mt-0.5">100% Natural</div>
-          </motion.div>
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 5, repeat: Infinity }}
-            className="absolute -bottom-2 -left-2 sm:-bottom-6 sm:-left-6 bg-white/10 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 shadow-2xl">
-            <div className="text-white text-xs font-semibold">Fast Delivery</div>
-            <div className="text-red-400 text-[10px] font-semibold mt-0.5">Swift & Quick</div>
+            <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
+              Akara + Pap + Bread + Hollandia Evap Milk & Sugar
+            </h3>
+            <div className="inline-flex items-baseline gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-1.5 my-2">
+              <span className="text-2xl font-bold text-amber-300">₦2,300</span>
+            </div>
+            <p className="text-slate-300 text-xs italic mt-2">
+              📩 SEND A DM TO ORDER NOW!
+            </p>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -315,119 +342,226 @@ function SectionHeader({ badge, title, highlight, sub, dark = false }) {
   );
 }
 
-// ─── Gallery & Product Data ───────────────────────────────────────────────────
-const GALLERY = [
-  { id: 1, name: "Akara & Creamy Pap", desc: "Pair your akara with smooth, warm pap for a classic breakfast.", img: Pap, tag: "Classic Pairing" },
-  { id: 2, name: "Akara & Custard", desc: "Crispy akara with rich, creamy custard — breakfast royalty.", img: Enjoy, tag: "Sweet Combo" },
-  { id: 3, name: "Akara Sandwich", desc: "Stuff fresh akara into soft bread with greens and chilled juice.", img: Sugar, tag: "On-The-Go" },
-  { id: 4, name: "Akara On Its Own", desc: "Just our golden, crispy akara — fluffy inside, perfect anytime.", img: Sweet, tag: "Pure & Simple" },
+// ─── FULL BREAKFAST MENU (text-only — no images) ──────────────────────────────
+const BREAKFAST_MENU = [
+  {
+    category: "AKARA",
+    icon: "🫘",
+    color: "from-red-500 to-red-700",
+    accent: "red",
+    items: [
+      { id: "akara-6", name: "6 Pieces Akara", price: 500 },
+      { id: "akara-12", name: "12 Pieces Akara", price: 1000 },
+      { id: "akara-18", name: "18 Pieces Akara", price: 1500 },
+      { id: "akara-24", name: "24 Pieces Akara", price: 2000 },
+    ],
+  },
+  {
+    category: "PAP (OGI)",
+    icon: "🥣",
+    color: "from-amber-500 to-orange-600",
+    accent: "amber",
+    items: [
+      { id: "pap-plain", name: "Plain Pap", price: 500 },
+      { id: "pap-sugar", name: "Pap + Sugar", price: 600 },
+      { id: "pap-powdered", name: "Pap + Sugar + Powdered Milk (sachet)", price: 800 },
+      { id: "pap-hollandia", name: "Pap + Sugar + Hollandia Evaporated Milk", price: 900 },
+      { id: "pap-peak", name: "Pap + Sugar + Peak Evaporated Milk", price: 950 },
+    ],
+  },
+  {
+    category: "CUSTARD",
+    icon: "🍮",
+    color: "from-yellow-500 to-amber-600",
+    accent: "yellow",
+    items: [
+      { id: "custard-plain", name: "Plain Custard", price: 500 },
+      { id: "custard-sugar", name: "Custard + Sugar", price: 600 },
+      { id: "custard-powdered", name: "Custard + Sugar + Powdered Milk", price: 800 },
+      { id: "custard-hollandia", name: "Custard + Sugar + Hollandia Evaporated Milk", price: 900 },
+      { id: "custard-peak", name: "Custard + Sugar + Peak Evaporated Milk", price: 950 },
+    ],
+  },
+  {
+    category: "BREAD",
+    icon: "🍞",
+    color: "from-orange-500 to-red-600",
+    accent: "orange",
+    items: [
+      { id: "bread-mini", name: "Mini Bread", price: 200 },
+      { id: "bread-small", name: "Small Bread", price: 400 },
+      { id: "bread-big", name: "Big Bread", price: 900 },
+    ],
+  },
 ];
 
-const AKARA_PRODUCT = {
-  id: "akara-single",
-  name: "Fresh Akara (Beans Cake)",
-  desc: "Crispy on the outside, fluffy on the inside. Made fresh every morning from premium black-eyed beans.",
-  price: 100,
-  img: monday,
-};
-
-// ─── Product Section ──────────────────────────────────────────────────────────
+// ─── Product Section (TEXT-ONLY menu cards) ───────────────────────────────────
 function ProductSection({ cart, setCart }) {
-  const inCart = cart[AKARA_PRODUCT.id]?.qty || 0;
-  const totalPrice = inCart * AKARA_PRODUCT.price;
-  const increment = () => setCart((c) => ({ ...c, [AKARA_PRODUCT.id]: { ...AKARA_PRODUCT, qty: (c[AKARA_PRODUCT.id]?.qty || 0) + 1 } }));
-  const decrement = () => setCart((c) => {
-    const current = c[AKARA_PRODUCT.id]?.qty || 0;
-    if (current <= 1) { const next = { ...c }; delete next[AKARA_PRODUCT.id]; return next; }
-    return { ...c, [AKARA_PRODUCT.id]: { ...AKARA_PRODUCT, qty: current - 1 } };
+  const addToCart = (item) => setCart((c) => ({
+    ...c,
+    [item.id]: { ...item, qty: (c[item.id]?.qty || 0) + 1 },
+  }));
+  const removeFromCart = (item) => setCart((c) => {
+    const current = c[item.id]?.qty || 0;
+    if (current <= 1) { const next = { ...c }; delete next[item.id]; return next; }
+    return { ...c, [item.id]: { ...c[item.id], qty: current - 1 } };
   });
-  const tagColor = { "Classic Pairing": "bg-red-600", "Sweet Combo": "bg-slate-800", "On-The-Go": "bg-amber-600", "Pure & Simple": "bg-slate-700" };
 
   return (
     <section id="menu" className="py-20 sm:py-28 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
       <div className="absolute top-20 left-10 w-72 h-72 bg-red-100/40 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
-        <SectionHeader badge="Order Now" title="Get Your Fresh" highlight="Akara" sub="Just ₦100 per piece. Adjust your quantity and add to cart instantly." />
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden mb-24">
-          <div className="grid md:grid-cols-2">
-            <div className="relative h-72 md:h-auto overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50">
-              <motion.img src={AKARA_PRODUCT.img} alt={AKARA_PRODUCT.name} className="w-full h-full object-cover" whileHover={{ scale: 1.05 }} transition={{ duration: 0.6 }} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg tracking-wide">Fresh & Hot</span>
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                <div className="bg-white/15 backdrop-blur-xl rounded-lg px-3 py-1.5 flex items-center gap-1.5 border border-white/20">
-                  <span className="text-amber-400 text-sm">★</span><span className="text-white text-sm font-semibold">4.9</span>
-                </div>
-                <div className="bg-white/15 backdrop-blur-xl rounded-lg px-3 py-1.5 border border-white/20">
-                  <span className="text-white text-sm font-semibold">Swift Delivery</span>
-                </div>
-              </div>
-            </div>
-            <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight tracking-tight">{AKARA_PRODUCT.name}</h3>
-                <p className="text-slate-500 mt-3 leading-relaxed text-sm sm:text-base">{AKARA_PRODUCT.desc}</p>
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-slate-400 text-sm">From</span>
-                  <span className="text-slate-900 font-bold text-2xl">₦{AKARA_PRODUCT.price}</span>
-                  <span className="text-slate-400 text-sm">/ piece</span>
-                </div>
-              </div>
-              <div className="mt-8">
-                <label className="text-xs font-semibold text-slate-600 mb-3 block uppercase tracking-wider">Select Quantity</label>
-                <div className="flex items-center justify-between bg-slate-50 rounded-2xl p-3 border border-slate-200">
-                  <motion.button whileTap={{ scale: 0.9 }} onClick={decrement} disabled={inCart <= 0}
-                    className="w-11 h-11 rounded-xl bg-white text-slate-700 font-bold text-xl shadow-sm border border-slate-200 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-slate-700 disabled:hover:border-slate-200">−</motion.button>
-                  <div className="text-center">
-                    <motion.div key={inCart} initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-3xl font-bold text-slate-900">{inCart}</motion.div>
-                    <div className="text-[10px] text-slate-500 font-medium uppercase tracking-wider mt-0.5">{inCart === 1 ? "piece" : "pieces"}</div>
-                  </div>
-                  <motion.button whileTap={{ scale: 0.9 }} onClick={increment} className="w-11 h-11 rounded-xl bg-red-600 text-white font-bold text-xl shadow-md hover:bg-red-700 transition-all">+</motion.button>
-                </div>
-                <AnimatePresence>
-                  {inCart > 0 && (
-                    <motion.div key={totalPrice} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
-                      className="mt-4 flex items-center justify-between p-4 bg-slate-900 rounded-2xl text-white">
-                      <span className="font-medium text-sm">Cart Total</span>
-                      <span className="text-xl font-bold">₦{totalPrice.toLocaleString()}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                <div className={`mt-4 w-full py-3.5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors ${inCart > 0 ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-slate-100 text-slate-500 border border-slate-200"}`}>
-                  {inCart > 0 ? `${inCart} ${inCart === 1 ? "piece" : "pieces"} · Open cart to checkout` : "Tap + to add akara to your cart"}
-                </div>
-              </div>
-            </div>
+        <SectionHeader
+          badge="Full Breakfast Menu"
+          title="Mama Akara"
+          highlight="Breakfast Menu"
+          sub="Fresh, hot, and made with pure groundnut oil. Choose from our full menu below and add takeaway pack at checkout if needed."
+        />
+
+        {/* Opening Hours Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mb-12 bg-gradient-to-r from-red-50 via-amber-50 to-red-50 border border-amber-200 rounded-2xl p-5 sm:p-6 text-center shadow-sm"
+        >
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <span className="text-2xl">🕕</span>
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900">Opening Days & Hours</h3>
           </div>
+          <p className="text-slate-700 text-sm sm:text-base font-medium">
+            Mondays, Wednesdays, Thursdays, Fridays & Saturdays
+          </p>
+          <p className="text-red-600 font-bold text-base sm:text-lg mt-1">
+            6:30 AM – 10:00 AM
+          </p>
+          <p className="text-slate-500 text-xs mt-2 italic">
+            Fried fresh with 100% pure groundnut oil — never palm oil
+          </p>
         </motion.div>
-        <SectionHeader badge="Serving Ideas" title="How To Enjoy Your" highlight="Akara" sub="Elevate your akara experience with these delicious pairings." />
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {GALLERY.map((g, i) => (
-            <motion.div key={g.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }} whileHover={{ y: -6 }}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-slate-300/40 transition-all duration-500 border border-slate-100">
-              <div className="relative h-56 overflow-hidden bg-slate-100">
-                <motion.img src={g.img} alt={g.name} className="w-full h-full object-cover" whileHover={{ scale: 1.08 }} transition={{ duration: 0.6 }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                <span className={`absolute top-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full text-white ${tagColor[g.tag]} shadow-lg uppercase tracking-wider`}>{g.tag}</span>
+
+        {/* Menu by Category — TEXT ONLY */}
+        <div className="space-y-14">
+          {BREAKFAST_MENU.map((cat, catIdx) => (
+            <motion.div
+              key={cat.category}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: catIdx * 0.1 }}
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-lg text-2xl`}>
+                  {cat.icon}
+                </div>
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">{cat.category}</h3>
+                  <p className="text-slate-500 text-sm">{cat.items.length} option{cat.items.length !== 1 ? "s" : ""} available</p>
+                </div>
               </div>
-              <div className="p-5">
-                <h3 className="font-bold text-slate-900 text-base leading-tight">{g.name}</h3>
-                <p className="text-slate-500 text-sm mt-2 leading-relaxed">{g.desc}</p>
+
+              {/* Text-Only Item Cards */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {cat.items.map((item, i) => {
+                  const inCart = cart[item.id]?.qty || 0;
+                  return (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.05 }}
+                      whileHover={{ y: -4 }}
+                      className="group relative bg-white rounded-2xl p-5 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 border border-slate-100 hover:border-slate-200 transition-all duration-300 overflow-hidden"
+                    >
+                      {/* Top accent bar */}
+                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cat.color}`} />
+
+                      {/* In-cart badge */}
+                      {inCart > 0 && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-md"
+                        >
+                          {inCart}
+                        </motion.div>
+                      )}
+
+                      {/* Category tag */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className={`inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2 py-1 rounded-md bg-gradient-to-r ${cat.color}`}>
+                          {cat.category}
+                        </span>
+                      </div>
+
+                      {/* Item Name */}
+                      <h4 className="font-bold text-slate-900 text-base leading-snug mb-3 min-h-[3rem]">
+                        {item.name}
+                      </h4>
+
+                      {/* Price */}
+                      <div className="flex items-baseline gap-1 mb-4">
+                        <span className="text-slate-400 text-xs">₦</span>
+                        <span className="text-2xl font-bold text-slate-900">{item.price.toLocaleString()}</span>
+                      </div>
+
+                      {/* Action Buttons */}
+                      {inCart > 0 ? (
+                        <div className="flex items-center justify-between bg-slate-50 rounded-xl p-1.5 border border-slate-200">
+                          <motion.button
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => removeFromCart(item)}
+                            className="w-9 h-9 rounded-lg bg-white text-slate-700 font-bold text-lg shadow-sm border border-slate-200 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all"
+                          >−</motion.button>
+                          <span className="font-bold text-slate-900 text-sm">
+                            {inCart} in cart
+                          </span>
+                          <motion.button
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => addToCart(item)}
+                            className="w-9 h-9 rounded-lg bg-red-600 text-white font-bold text-lg shadow-md hover:bg-red-700 transition-all"
+                          >+</motion.button>
+                        </div>
+                      ) : (
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => addToCart(item)}
+                          className="w-full py-3 rounded-xl bg-slate-900 hover:bg-red-600 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                          Add to Cart
+                        </motion.button>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
-        </motion.div>
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center text-slate-400 text-xs mt-10 italic">
-          Images shown are serving suggestions. We only sell freshly fried akara.
+        </div>
+
+        {/* Footer note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center text-slate-500 text-sm mt-14 italic max-w-2xl mx-auto"
+        >
+          All items are freshly prepared with 100% pure groundnut oil.
+          Add takeaway pack (+₦{TAKEAWAY_PRICE}) at checkout if you need one.
         </motion.p>
       </div>
     </section>
   );
 }
 
-// ─── Cart Drawer ──────────────────────────────────────────────────────────────
+// ─── Cart Drawer (text-only, no images) ───────────────────────────────────────
 function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
   const items = Object.values(cart);
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
@@ -460,27 +594,31 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                     <svg className="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                   </div>
                   <h4 className="text-lg font-bold text-slate-900">Your cart is empty</h4>
-                  <p className="text-slate-500 mt-2 text-sm">Add some delicious akara to get started</p>
+                  <p className="text-slate-500 mt-2 text-sm">Add some delicious items to get started</p>
                   <button onClick={onClose} className="mt-6 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-colors">Browse Menu</button>
                 </motion.div>
               ) : (
                 <div className="space-y-3">
                   <AnimatePresence>
                     {items.map((item) => (
-                      <motion.div key={item.id} layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="flex gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                        <img src={item.img} alt={item.name} className="w-20 h-20 rounded-xl object-cover" />
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-slate-900 text-sm truncate">{item.name}</h4>
-                          <p className="text-slate-900 font-bold text-base mt-1">₦{item.price.toLocaleString()}</p>
-                          <div className="flex items-center gap-2 mt-2">
+                      <motion.div key={item.id} layout initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-slate-900 text-sm leading-snug">{item.name}</h4>
+                            <p className="text-slate-500 text-xs mt-1">₦{item.price.toLocaleString()} each</p>
+                          </div>
+                          <button onClick={() => update(item.id, -item.qty)} className="text-slate-400 hover:text-red-500 transition-colors flex-shrink-0">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                          </button>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
                             <button onClick={() => update(item.id, -1)} className="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold text-slate-700 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors text-sm">−</button>
                             <span className="font-semibold text-sm w-6 text-center">{item.qty}</span>
                             <button onClick={() => update(item.id, 1)} className="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold text-slate-700 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors text-sm">+</button>
                           </div>
+                          <p className="text-slate-900 font-bold text-base">₦{(item.price * item.qty).toLocaleString()}</p>
                         </div>
-                        <button onClick={() => update(item.id, -item.qty)} className="text-slate-400 hover:text-red-500 transition-colors self-start">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                        </button>
                       </motion.div>
                     ))}
                   </AnimatePresence>
@@ -492,7 +630,7 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
                 <div className="flex justify-between text-sm text-slate-600"><span>Subtotal</span><span className="font-semibold text-slate-900">₦{subtotal.toLocaleString()}</span></div>
                 <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-700 flex items-start gap-2">
                   <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span><strong className="font-semibold">Delivery fee</strong> is paid directly to the rider upon arrival.</span>
+                  <span><strong className="font-semibold">Delivery fee</strong> is paid directly to the rider upon arrival. Takeaway pack (+₦{TAKEAWAY_PRICE}) can be added at checkout.</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold text-slate-900 pt-3 border-t border-slate-200"><span>Total</span><span>₦{subtotal.toLocaleString()}</span></div>
                 <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }} onClick={onCheckout}
@@ -510,22 +648,22 @@ function CartDrawer({ open, onClose, cart, setCart, onCheckout }) {
 
 // ─── Env / Config ─────────────────────────────────────────────────────────────
 const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 // ─── Email Helper ─────────────────────────────────────────────────────────────
-async function sendDeliveryDetailsEmail(form, cart = {}) {
+async function sendDeliveryDetailsEmail(form, cart = {}, takeaway = false) {
   if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
     console.warn("EmailJS not configured — skipping email.");
     return { ok: false };
   }
   const items = Object.values(cart);
   const orderSummary = items.length ? items.map((i) => `• ${i.name} x${i.qty} — ₦${(i.price * i.qty).toLocaleString()}`).join("\n") : "No items";
-  const totalAmount = items.reduce((s, i) => s + i.price * i.qty, 0);
-  const fullMessage = `ORDER DETAILS:\n${orderSummary}\n\nTotal: ₦${totalAmount.toLocaleString()}\n\nNotes:\n${form.note || "None"}`;
+  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const takeawayFee = takeaway ? TAKEAWAY_PRICE : 0;
+  const totalAmount = subtotal + takeawayFee;
+  const fullMessage = `ORDER DETAILS:\n${orderSummary}\n\nSubtotal: ₦${subtotal.toLocaleString()}\nTakeaway Pack: ${takeaway ? `₦${takeawayFee}` : "No"}\nTotal: ₦${totalAmount.toLocaleString()}\n\nNotes:\n${form.note || "None"}`;
   try {
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
@@ -542,29 +680,23 @@ async function sendDeliveryDetailsEmail(form, cart = {}) {
 }
 
 // ─── Build WhatsApp URL ───────────────────────────────────────────────────────
-function buildWhatsAppUrl({ form, cart, transaction, total }) {
+function buildWhatsAppUrl({ form, cart, transaction, total, takeaway }) {
   const items = Object.values(cart);
   const orderSummary = items.map((i) => `• ${i.name} x${i.qty} — ₦${(i.price * i.qty).toLocaleString()}`).join("\n");
+  const takeawayLine = takeaway ? `\n📦 *Takeaway Pack:* ₦${TAKEAWAY_PRICE}` : `\n📦 *Takeaway Pack:* No`;
   const message =
     `🎉 *NEW ORDER — PAYMENT CONFIRMED* 🎉\n\n` +
     `Hello Mama Akara! A customer has just paid for an order via Paystack.\n\n` +
     `👤 *Customer Details*\n` +
     `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email || "Not provided"}\nAddress: ${form.address}\n\n` +
-    `🛒 *Order Summary*\n${orderSummary}\n\n` +
+    `🛒 *Order Summary*\n${orderSummary}` +
+    takeawayLine + `\n\n` +
     `💰 *Total Paid:* ₦${total.toLocaleString()}\n` +
     `💳 *Payment Method:* ${transaction?.channel || "card"}\n` +
     `🔖 *Reference:* ${transaction?.reference || "N/A"}\n\n` +
     `📝 *Notes:* ${form.note || "None"}\n\n` +
     `Please prepare this order for immediate delivery. Thank you! 🙏`;
   return `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-function redirectToWhatsAppSeller({ form, cart, transaction, total }) {
-  try {
-    window.location.href = buildWhatsAppUrl({ form, cart, transaction, total });
-  } catch (err) {
-    console.error("WhatsApp redirect failed:", err);
-  }
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -581,20 +713,11 @@ function getPaystackChannels(method) {
   return map[method] ?? ["card", "bank_transfer", "ussd", "qr"];
 }
 
-// ─── FIX: Save order using Supabase JS client directly ───────────────────────
-// Root cause of "failed to save delivery information":
-// The previous fetch() REST calls were failing silently due to:
-// 1. Missing or wrong SUPABASE_URL / SUPABASE_ANON_KEY env vars
-// 2. Row Level Security (RLS) blocking anonymous inserts on the orders table
-// 3. Network timeout with no AbortController — requests hung for 30+ seconds
-// 4. The items array containing non-serialisable values (React img references)
-//
-// Fix: Use the already-imported supabase JS client (which is already configured
-// with the correct URL + key from your lib/supabase file), strip image refs
-// from items before saving, and add a 10-second timeout so failures are instant.
-async function saveOrderToSupabase({ form, items, total, status = "pending", paymentChannel = "pending", paystackReference }) {
-  // Strip image (img) from items — Supabase JSONB can't store React imports
+async function saveOrderToSupabase({ form, items, total, status = "pending", paymentChannel = "pending", paystackReference, takeaway = false }) {
   const cleanItems = items.map(({ id, name, price, qty }) => ({ id, name, price, qty }));
+  if (takeaway) {
+    cleanItems.push({ id: "takeaway-pack", name: "Takeaway Pack", price: TAKEAWAY_PRICE, qty: 1 });
+  }
 
   const orderData = {
     order_number: generateOrderNumber(),
@@ -602,7 +725,7 @@ async function saveOrderToSupabase({ form, items, total, status = "pending", pay
     customer_email: form.email?.trim() || "",
     customer_phone: form.phone.trim(),
     delivery_address: form.address.trim(),
-    order_notes: form.note?.trim() || "",
+    order_notes: (form.note?.trim() || "") + (takeaway ? " | Takeaway pack requested." : ""),
     items: cleanItems,
     subtotal: total,
     total_amount: total,
@@ -612,7 +735,6 @@ async function saveOrderToSupabase({ form, items, total, status = "pending", pay
     paystack_reference: paystackReference || `PENDING_${Date.now()}`,
   };
 
-  // Use the supabase JS client — already has correct URL + anon key + auth
   const { data, error } = await supabase
     .from("orders")
     .insert([orderData])
@@ -627,7 +749,6 @@ async function saveOrderToSupabase({ form, items, total, status = "pending", pay
   return data;
 }
 
-// ─── FIX: Update order payment using Supabase JS client ──────────────────────
 async function updateOrderPayment({ orderId, reference, channel }) {
   const { data, error } = await supabase
     .from("orders")
@@ -650,23 +771,16 @@ async function updateOrderPayment({ orderId, reference, channel }) {
 }
 
 // ─── Paystack Loader Hook ─────────────────────────────────────────────────────
-// FIX: Previous version relied only on script.onload firing correctly,
-// but sometimes the script loads BEFORE the useEffect runs (from a previous
-// mount), or window.PaystackPop becomes available slightly after onload fires.
-// This new version uses POLLING to actively check every 200ms until Paystack
-// is ready — guaranteed to detect it whenever it becomes available.
 function usePaystackLoader() {
   const [paystackReady, setPaystackReady] = useState(false);
   const [paystackError, setPaystackError] = useState(false);
 
   useEffect(() => {
-    // If already loaded (from previous mount or hot reload), mark ready immediately
     if (typeof window.PaystackPop !== "undefined") {
       setPaystackReady(true);
       return;
     }
 
-    // Inject the script only if not already present in the DOM
     const existing = document.querySelector(
       'script[src="https://js.paystack.co/v2/inline.js"]'
     );
@@ -682,24 +796,16 @@ function usePaystackLoader() {
       document.head.appendChild(script);
     }
 
-    // FIX: Poll every 200ms to check if PaystackPop is available.
-    // This is more reliable than depending on onload alone because:
-    // 1. The script might already be loading from a previous mount
-    // 2. Some browsers fire onload before window.PaystackPop is assigned
-    // 3. Network conditions vary — polling ensures we always catch it
     let attempts = 0;
-    const maxAttempts = 50; // 50 * 200ms = 10 seconds max wait
+    const maxAttempts = 50;
 
     const pollInterval = setInterval(() => {
       attempts++;
-
       if (typeof window.PaystackPop !== "undefined") {
         setPaystackReady(true);
         clearInterval(pollInterval);
         return;
       }
-
-      // Give up after 10 seconds and show error
       if (attempts >= maxAttempts) {
         console.error("Paystack script failed to initialize after 10 seconds.");
         setPaystackError(true);
@@ -707,14 +813,13 @@ function usePaystackLoader() {
       }
     }, 200);
 
-    // Cleanup: stop polling if component unmounts
     return () => clearInterval(pollInterval);
   }, []);
 
   return { paystackReady, paystackError };
 }
 
-// ─── Checkout Modal ───────────────────────────────────────────────────────────
+// ─── Checkout Modal (with Takeaway Option, text-only order review) ───────────
 function CheckoutModal({ open, onClose, cart, setCart }) {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({ name: "", phone: "", email: "", address: "", note: "" });
@@ -725,23 +830,30 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
   const [deliverySaving, setDeliverySaving] = useState(false);
   const [savedOrderId, setSavedOrderId] = useState(null);
   const [whatsappUrl, setWhatsappUrl] = useState(null);
+  const [takeaway, setTakeaway] = useState(false);
 
   const { showToast } = useToast();
   const { paystackReady, paystackError } = usePaystackLoader();
 
   const items = Object.values(cart);
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
-  const total = subtotal;
+  const takeawayFee = takeaway ? TAKEAWAY_PRICE : 0;
+  const total = subtotal + takeawayFee;
 
   const reset = () => {
     setStep(1); setForm({ name: "", phone: "", email: "", address: "", note: "" });
     setPayMethod("card"); setSuccess(false); setLoading(false);
     setDeliverySaved(false); setDeliverySaving(false); setSavedOrderId(null); setWhatsappUrl(null);
+    setTakeaway(false);
   };
 
   const close = () => { onClose(); setTimeout(reset, 400); };
 
-  // ── Save Delivery Info ────────────────────────────────────────────────────
+  useEffect(() => {
+    if (deliverySaved) setDeliverySaved(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [takeaway]);
+
   const handleSaveDelivery = async () => {
     if (!form.name.trim() || !form.phone.trim() || !form.address.trim()) {
       showToast("Please fill in Name, Phone and Address first.", "error");
@@ -751,8 +863,6 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
     setDeliverySaving(true);
 
     try {
-      // FIX: Use saveOrderToSupabase (Supabase JS client) instead of raw fetch
-      // This eliminates env var mismatch, RLS issues, and hanging timeouts
       const savedOrder = await saveOrderToSupabase({
         form,
         items,
@@ -760,21 +870,18 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
         status: "pending",
         paymentChannel: "pending",
         paystackReference: `PENDING_${Date.now()}`,
+        takeaway,
       });
 
       if (savedOrder?.id) setSavedOrderId(savedOrder.id);
 
       setDeliverySaved(true);
 
-      // Send email in background — don't block or fail on this
-      sendDeliveryDetailsEmail(form, cart).catch(console.error);
+      sendDeliveryDetailsEmail(form, cart, takeaway).catch(console.error);
 
       showToast("✅ Delivery information saved successfully!", "success");
     } catch (err) {
       console.error("Save delivery failed:", err);
-
-      // FIX: Give a specific, actionable error message instead of a generic one
-      // so the customer knows what actually went wrong
       const msg = err?.message || "";
       if (msg.includes("relation") || msg.includes("does not exist")) {
         showToast("Database table not found. Please contact support.", "error");
@@ -792,7 +899,6 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
     }
   };
 
-  // ── Handle Payment ────────────────────────────────────────────────────────
   const handlePay = () => {
     if (!deliverySaved) {
       showToast("Please save your delivery information first.", "error");
@@ -831,28 +937,25 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
           { display_name: "Phone Number", variable_name: "phone_number", value: form.phone },
           { display_name: "Delivery Address", variable_name: "delivery_address", value: form.address },
           { display_name: "Order Notes", variable_name: "order_notes", value: form.note || "None" },
+          { display_name: "Takeaway Pack", variable_name: "takeaway", value: takeaway ? `Yes (+₦${TAKEAWAY_PRICE})` : "No" },
           { display_name: "Items Ordered", variable_name: "items_ordered", value: items.map((i) => `${i.name} x${i.qty}`).join(", ") },
         ],
       },
       onSuccess: async (transaction) => {
         console.log("Paystack success:", transaction);
-        // Update order to "paid"
         if (savedOrderId) {
           try { await updateOrderPayment({ orderId: savedOrderId, reference: transaction.reference, channel: transaction.channel }); }
           catch (err) { console.error("Failed to update order payment:", err); showToast("Payment received but update failed. We will review manually.", "info"); }
         }
-        // Send email in background
-        sendDeliveryDetailsEmail(form, cart).catch(console.error);
+        sendDeliveryDetailsEmail(form, cart, takeaway).catch(console.error);
 
         setLoading(false);
         setSuccess(true);
         showToast("🎉 Payment successful! Your order is confirmed.");
 
-        // Build and store WhatsApp URL
-        const url = buildWhatsAppUrl({ form, cart, transaction, total });
+        const url = buildWhatsAppUrl({ form, cart, transaction, total, takeaway });
         setWhatsappUrl(url);
 
-        // Auto redirect to WhatsApp
         setTimeout(() => { window.location.href = url; }, 2500);
       },
       onCancel: () => { setLoading(false); showToast("Payment cancelled. Try again when ready.", "info"); },
@@ -872,7 +975,6 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
             transition={{ type: "spring", damping: 26 }} onClick={(e) => e.stopPropagation()}
             className="bg-white rounded-3xl w-full max-w-2xl max-h-[92vh] overflow-hidden flex flex-col shadow-2xl">
 
-            {/* Header */}
             <div className="p-6 bg-gradient-to-br from-slate-900 to-slate-800 text-white relative flex-shrink-0">
               <button onClick={close} className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center transition-colors"><HiX className="w-4 h-4" /></button>
               <h2 className="text-xl font-bold tracking-tight">Checkout</h2>
@@ -891,11 +993,10 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
               <div className="flex justify-between text-[10px] mt-2 text-slate-400 font-semibold uppercase tracking-wider"><span>Details</span><span>Review</span><span>Payment</span></div>
             </div>
 
-            {/* Body */}
             <div className="flex-1 overflow-y-auto p-6">
               <AnimatePresence mode="wait">
 
-                {/* Step 1 */}
+                {/* STEP 1 — Details + Takeaway Option */}
                 {step === 1 && (
                   <motion.div key="s1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                     <h3 className="text-base font-bold text-slate-900">Delivery Details</h3>
@@ -913,12 +1014,85 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                     <textarea value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })}
                       placeholder="Special instructions (optional)" rows={3}
                       className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100 outline-none transition-all resize-none text-sm" />
+
+                    {/* Takeaway Pack Option */}
+                    <div className="pt-2">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
+                        Do you want a Takeaway Pack? 📦
+                      </label>
+                      <div className="grid grid-cols-2 gap-3">
+                        <motion.button
+                          type="button"
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setTakeaway(true)}
+                          className={`p-4 rounded-xl border-2 transition-all text-left ${
+                            takeaway
+                              ? "border-emerald-500 bg-emerald-50"
+                              : "border-slate-200 bg-white hover:border-slate-300"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-2xl">📦</span>
+                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                              takeaway ? "border-emerald-500 bg-emerald-500" : "border-slate-300"
+                            }`}>
+                              {takeaway && (
+                                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                          </div>
+                          <p className={`font-bold text-sm ${takeaway ? "text-emerald-800" : "text-slate-900"}`}>With Takeaway</p>
+                          <p className={`text-xs mt-1 ${takeaway ? "text-emerald-700" : "text-slate-500"}`}>+₦{TAKEAWAY_PRICE} per pack</p>
+                        </motion.button>
+
+                        <motion.button
+                          type="button"
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => setTakeaway(false)}
+                          className={`p-4 rounded-xl border-2 transition-all text-left ${
+                            !takeaway
+                              ? "border-slate-900 bg-slate-50"
+                              : "border-slate-200 bg-white hover:border-slate-300"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-2xl">🚫</span>
+                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                              !takeaway ? "border-slate-900 bg-slate-900" : "border-slate-300"
+                            }`}>
+                              {!takeaway && (
+                                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                          </div>
+                          <p className={`font-bold text-sm ${!takeaway ? "text-slate-900" : "text-slate-900"}`}>No Takeaway</p>
+                          <p className={`text-xs mt-1 ${!takeaway ? "text-slate-700" : "text-slate-500"}`}>No extra charge</p>
+                        </motion.button>
+                      </div>
+
+                      <AnimatePresence>
+                        {takeaway && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800"
+                          >
+                            <strong>Takeaway pack added</strong> — ₦{TAKEAWAY_PRICE} will be added to your total.
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
                     <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-start gap-2.5">
                       <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span><strong className="font-semibold">Note:</strong> We deliver within Abraka, Delta State. Delivery fee is paid directly to the rider upon arrival.</span>
                     </div>
 
-                    {/* Green Save Button */}
                     <AnimatePresence>
                       {canNext1 && (
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}>
@@ -955,7 +1129,7 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                   </motion.div>
                 )}
 
-                {/* Step 2 */}
+                {/* STEP 2 — Review (TEXT-ONLY, no item images) */}
                 {step === 2 && (
                   <motion.div key="s2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                     <h3 className="text-base font-bold text-slate-900">Order Summary</h3>
@@ -970,26 +1144,40 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         </div>
                       </div>
                     )}
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {items.map((i) => (
-                        <div key={i.id} className="flex gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                          <img src={i.img} alt={i.name} className="w-16 h-16 rounded-lg object-cover" />
-                          <div className="flex-1"><p className="font-semibold text-slate-900 text-sm">{i.name}</p><p className="text-xs text-slate-500">Qty: {i.qty}</p></div>
-                          <p className="font-bold text-slate-900">₦{(i.price * i.qty).toLocaleString()}</p>
+                        <div key={i.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-slate-900 text-sm leading-snug">{i.name}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">Qty: {i.qty} × ₦{i.price.toLocaleString()}</p>
+                          </div>
+                          <p className="font-bold text-slate-900 text-base ml-3 flex-shrink-0">₦{(i.price * i.qty).toLocaleString()}</p>
                         </div>
                       ))}
+                      {takeaway && (
+                        <div className="flex items-center justify-between p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                          <div className="flex-1">
+                            <p className="font-semibold text-emerald-900 text-sm">📦 Takeaway Pack</p>
+                            <p className="text-xs text-emerald-700 mt-0.5">Qty: 1</p>
+                          </div>
+                          <p className="font-bold text-emerald-900 ml-3">₦{TAKEAWAY_PRICE.toLocaleString()}</p>
+                        </div>
+                      )}
                     </div>
                     <div className="p-4 bg-slate-50 rounded-xl space-y-2 border border-slate-100">
                       <div className="flex justify-between text-sm text-slate-700"><span>Subtotal</span><span className="font-semibold">₦{subtotal.toLocaleString()}</span></div>
+                      {takeaway && (
+                        <div className="flex justify-between text-sm text-emerald-700"><span>Takeaway Pack</span><span className="font-semibold">+₦{TAKEAWAY_PRICE.toLocaleString()}</span></div>
+                      )}
                       <div className="flex justify-between text-sm text-slate-700"><span>Delivery</span><span className="font-semibold text-blue-600">Paid on Delivery</span></div>
                       <div className="flex justify-between font-bold text-lg text-slate-900 pt-2 border-t border-slate-200"><span>Total to Pay Now</span><span>₦{total.toLocaleString()}</span></div>
                     </div>
                     <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-700"><strong className="font-semibold">Delivering to:</strong> {form.address}</div>
-                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800"><strong className="font-semibold">Fast & Swift Delivery:</strong> Your akara will be delivered immediately once payment is received.</div>
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800"><strong className="font-semibold">Fast & Swift Delivery:</strong> Your order will be delivered immediately once payment is received.</div>
                   </motion.div>
                 )}
 
-                {/* Step 3 */}
+                {/* STEP 3 — Payment */}
                 {step === 3 && (
                   <motion.div key="s3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4">
                     {loading && (
@@ -1075,6 +1263,9 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
                         </div>
                         <div className="p-4 bg-slate-900 rounded-xl text-white">
                           <div className="flex justify-between items-baseline"><span className="text-sm text-slate-300">You'll pay</span><span className="text-2xl font-bold">₦{total.toLocaleString()}</span></div>
+                          {takeaway && (
+                            <p className="text-[11px] text-emerald-400 mt-1.5">Includes ₦{TAKEAWAY_PRICE} takeaway pack</p>
+                          )}
                           <p className="text-[11px] text-slate-400 mt-1.5">+ Delivery fee paid to rider on arrival</p>
                         </div>
                         <div className="text-xs text-slate-500 text-center flex items-center justify-center gap-1.5">
@@ -1088,7 +1279,6 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
               </AnimatePresence>
             </div>
 
-            {/* Footer */}
             {!loading && !success && (
               <div className="p-6 border-t border-slate-100 flex gap-3 bg-slate-50 flex-shrink-0">
                 {step > 1 && (
@@ -1117,9 +1307,9 @@ function CheckoutModal({ open, onClose, cart, setCart }) {
 function WhyUs() {
   const features = [
     { title: "Made Fresh Daily", desc: "Every batch is prepared at dawn with freshly soaked beans. Zero compromise on quality." },
-    { title: "Lightning Delivery", desc: "Fast and swift delivery immediately once payment is received." },
-    { title: "Premium Quality", desc: "We use only the finest local black-eyed beans and pure palm oil." },
-    { title: "Unbeatable Prices", desc: "Restaurant-quality akara at street-food prices. Just ₦100 per piece." },
+    { title: "Pure Groundnut Oil", desc: "We fry only with 100% pure groundnut oil — never palm oil. Healthier and tastier." },
+    { title: "Premium Quality", desc: "We use only the finest local black-eyed beans, carefully sorted every morning." },
+    { title: "Unbeatable Prices", desc: "Restaurant-quality akara at street-food prices. 6 pieces for just ₦500." },
     { title: "Hygienic & Safe", desc: "Top food safety standards. Sealed packaging every time." },
     { title: "Easy Ordering", desc: "Order in seconds. Pay online securely with Paystack." },
   ];
@@ -1228,7 +1418,7 @@ function DeliveryProcess() {
         </div>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-16 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
           <div className="grid md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
-            {[{ label: "Delivery Zones", value: "Within Abraka, Delta" }, { label: "Average Time", value: "Fast & Swift" }, { label: "Delivery Fee", value: "Paid on Delivery" }].map((stat, i) => (
+            {[{ label: "Delivery Zones", value: "Within Abraka, Delta" }, { label: "Opening Hours", value: "6:30 AM – 10:00 AM" }, { label: "Delivery Fee", value: "Paid on Delivery" }].map((stat, i) => (
               <div key={i} className="p-4 md:px-6">
                 <div className="text-slate-400 text-xs uppercase tracking-wider font-semibold">{stat.label}</div>
                 <div className="text-lg sm:text-xl font-bold text-slate-900 mt-2 tracking-tight">{stat.value}</div>
@@ -1236,7 +1426,7 @@ function DeliveryProcess() {
             ))}
           </div>
           <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-amber-50 border border-red-100 rounded-2xl text-center text-sm text-slate-700">
-            <strong className="font-semibold">Immediate delivery</strong> once payment is received — your akara is on the way!
+            <strong className="font-semibold">Open Mondays, Wednesdays, Thursdays, Fridays & Saturdays</strong> — immediate delivery once payment is received!
           </div>
         </motion.div>
       </div>
@@ -1260,7 +1450,12 @@ function Contact() {
         <SectionHeader badge="Get In Touch" title="Let's" highlight="Connect" sub="Questions? Catering inquiries? We're here to help." />
         <div className="grid lg:grid-cols-2 gap-10">
           <div className="space-y-3">
-            {[{ title: "Visit Us", text: "Abraka, Delta State, Nigeria" }, { title: "Call Us", text: BUSINESS_PHONE_DISPLAY }, { title: "Email", text: BUSINESS_EMAIL }, { title: "Hours", text: "Mon – Sun, 6:00 AM – 2:00 PM" }].map((c, i) => (
+            {[
+              { title: "Visit Us", text: "Abraka, Delta State, Nigeria" },
+              { title: "Call Us", text: BUSINESS_PHONE_DISPLAY },
+              { title: "Email", text: BUSINESS_EMAIL },
+              { title: "Opening Days & Hours", text: "Mon, Wed – Sat · 6:30 AM – 10:00 AM" }
+            ].map((c, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} whileHover={{ x: 4 }}
                 className="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:border-slate-200 hover:bg-slate-100 transition-all">
                 <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center flex-shrink-0">
