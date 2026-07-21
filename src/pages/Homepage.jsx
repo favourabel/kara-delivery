@@ -7,6 +7,15 @@ import Footer from "../component/Footer.jsx";
 import { useAdminAuth } from "../lib/context/AuthContext.jsx";
 import { supabase } from "../lib/Supabase.js";
 
+import Yummy from "../assets/Yummy.jpg";
+import Akp from "../assets/Akp.jpg";
+import Enjoy from "../assets/Enjoy.jpg";
+import pap from "../assets/Pap.jpg";
+import sugar from "../assets/Sugar.jpg";
+import Sweet from "../assets/Sweet.jpg";
+
+import monday from "../assets/monday.jpg"
+
 import {
   HiOutlineMail,
   HiOutlineLockClosed,
@@ -19,7 +28,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { BiLoader } from "react-icons/bi";
 
 import MAMA from "../assets/MAMA.jpeg";
-import monday from "../assets/monday.jpg";
+
 
 export const BUSINESS_EMAIL = "Egileweprecious1@gmail.com";
 export const BUSINESS_PHONE_DISPLAY = "+234 913 283 0290";
@@ -343,218 +352,64 @@ function SectionHeader({ badge, title, highlight, sub, dark = false }) {
 }
 
 
-// ─── FULL BREAKFAST MENU WITH VERIFIED WORKING IMAGES ────────────────────────
+// ─── FULL BREAKFAST MENU ──────────────────────────
 const BREAKFAST_MENU = [
   {
     category: "AKARA",
     icon: "🫘",
-    color: "from-red-500 to-red-700",
-    accent: "red",
+    color: "#dc2626",
     items: [
-      {
-        id: "akara-6",
-        name: "6 Pieces Akara",
-        description:
-          "Fresh palm oil akara, 6 pieces, crispy outside and soft inside.",
-        price: 500,
-        image:
-          "https://cdn.pixabay.com/photo/2020/10/05/19/55/falafel-5630805_640.jpg",
-        imageAlt: "6 pieces of palm oil akara",
-      },
-      {
-        id: "akara-12",
-        name: "12 Pieces Akara",
-        description:
-          "Fresh palm oil akara, 12 pieces, golden-orange and well fried.",
-        price: 1000,
-        image:
-          "https://cdn.pixabay.com/photo/2020/10/05/19/55/falafel-5630805_640.jpg",
-        imageAlt: "12 pieces of palm oil akara",
-      },
-      {
-        id: "akara-18",
-        name: "18 Pieces Akara",
-        description:
-          "Fresh palm oil akara, 18 pieces, hot and ready to serve.",
-        price: 1500,
-        image:
-          "https://cdn.pixabay.com/photo/2020/10/05/19/55/falafel-5630805_640.jpg",
-        imageAlt: "18 pieces of palm oil akara",
-      },
-      {
-        id: "akara-24",
-        name: "24 Pieces Akara",
-        description:
-          "Fresh palm oil akara, 24 pieces, perfect for sharing.",
-        price: 2000,
-        image:
-          "https://cdn.pixabay.com/photo/2020/10/05/19/55/falafel-5630805_640.jpg",
-        imageAlt: "24 pieces of palm oil akara",
-      },
+      { id: "akara-6", name: "6 Pieces Akara", description: "Fresh palm oil akara, 6 pieces, crispy outside and soft inside.", price: 500, image: Enjoy },
+      { id: "akara-12", name: "12 Pieces Akara", description: "Fresh palm oil akara, 12 pieces, golden-orange and well fried.", price: 1000, image: Akp },
+      { id: "akara-18", name: "18 Pieces Akara", description: "Fresh palm oil akara, 18 pieces, hot and ready to serve.", price: 1500, image: Sweet },
+      { id: "akara-24", name: "24 Pieces Akara", description: "Fresh palm oil akara, 24 pieces, perfect for sharing.", price: 2000, image: Yummy },
     ],
   },
   {
     category: "PAP (OGI)",
     icon: "🥣",
-    color: "from-amber-500 to-orange-600",
-    accent: "amber",
+    color: "#f59e0b",
     items: [
-      {
-        id: "pap-plain",
-        name: "Plain Pap",
-        description: "Smooth hot Nigerian pap (ogi) served plain.",
-        price: 500,
-        image:
-          "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg",
-        imageAlt: "Bowl of plain pap ogi",
-      },
-      {
-        id: "pap-sugar",
-        name: "Pap + Sugar",
-        description: "Smooth hot pap (ogi) served with sugar.",
-        price: 600,
-        image:
-          "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg",
-        imageAlt: "Bowl of pap ogi with sugar",
-      },
-      {
-        id: "pap-powdered",
-        name: "Pap + Sugar + Powdered Milk (sachet)",
-        description:
-          "Creamy pap (ogi) served with sugar and powdered milk sachet.",
-        price: 800,
-        image:
-          "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg",
-        imageAlt: "Bowl of pap ogi with powdered milk",
-      },
-      {
-        id: "pap-hollandia",
-        name: "Pap + Sugar + Hollandia Evaporated Milk",
-        description:
-          "Creamy pap (ogi) served with sugar and Hollandia evaporated milk.",
-        price: 900,
-        image:
-          "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg",
-        imageAlt: "Bowl of pap ogi with Hollandia milk",
-      },
-      {
-        id: "pap-peak",
-        name: "Pap + Sugar + Peak Evaporated Milk",
-        description:
-          "Creamy pap (ogi) served with sugar and Peak evaporated milk.",
-        price: 950,
-        image:
-          "https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_640.jpg",
-        imageAlt: "Bowl of pap ogi with Peak milk",
-      },
+      { id: "pap-plain", name: "Plain Pap", description: "Smooth hot Nigerian pap (ogi) served plain.", price: 500, image: pap },
+      { id: "pap-sugar", name: "Pap + Sugar", description: "Smooth hot pap (ogi) served with sugar.", price: 600, image: sugar },
+      { id: "pap-powdered", name: "Pap + Sugar + Powdered Milk (sachet)", description: "Creamy pap (ogi) served with sugar and powdered milk sachet.", price: 800, image: monday },
+      { id: "pap-hollandia", name: "Pap + Sugar + Hollandia Evaporated Milk", description: "Creamy pap (ogi) served with sugar and Hollandia evaporated milk.", price: 900, image: monday },
+      { id: "pap-peak", name: "Pap + Sugar + Peak Evaporated Milk", description: "Creamy pap (ogi) served with sugar and Peak evaporated milk.", price: 950, image: monday },
     ],
   },
   {
     category: "CUSTARD",
     icon: "🍮",
-    color: "from-yellow-500 to-amber-600",
-    accent: "yellow",
+    color: "#eab308",
     items: [
-      {
-        id: "custard-plain",
-        name: "Plain Custard",
-        description: "Warm smooth custard served plain.",
-        price: 500,
-        image:
-          "https://cdn.pixabay.com/photo/2017/03/19/18/22/cream-2157142_640.jpg",
-        imageAlt: "Bowl of plain custard",
-      },
-      {
-        id: "custard-sugar",
-        name: "Custard + Sugar",
-        description: "Warm smooth custard served with sugar.",
-        price: 600,
-        image:
-          "https://cdn.pixabay.com/photo/2017/03/19/18/22/cream-2157142_640.jpg",
-        imageAlt: "Bowl of custard with sugar",
-      },
-      {
-        id: "custard-powdered",
-        name: "Custard + Sugar + Powdered Milk",
-        description: "Warm custard served with sugar and powdered milk.",
-        price: 800,
-        image:
-          "https://cdn.pixabay.com/photo/2017/03/19/18/22/cream-2157142_640.jpg",
-        imageAlt: "Bowl of custard with powdered milk",
-      },
-      {
-        id: "custard-hollandia",
-        name: "Custard + Sugar + Hollandia Evaporated Milk",
-        description:
-          "Warm custard served with sugar and Hollandia evaporated milk.",
-        price: 900,
-        image:
-          "https://cdn.pixabay.com/photo/2017/03/19/18/22/cream-2157142_640.jpg",
-        imageAlt: "Bowl of custard with Hollandia milk",
-      },
-      {
-        id: "custard-peak",
-        name: "Custard + Sugar + Peak Evaporated Milk",
-        description:
-          "Warm custard served with sugar and Peak evaporated milk.",
-        price: 950,
-        image:
-          "https://cdn.pixabay.com/photo/2017/03/19/18/22/cream-2157142_640.jpg",
-        imageAlt: "Bowl of custard with Peak milk",
-      },
+      { id: "custard-plain", name: "Plain Custard", description: "Warm smooth custard served plain.", price: 500, image: sugar },
+      { id: "custard-sugar", name: "Custard + Sugar", description: "Warm smooth custard served with sugar.", price: 600, image: sugar },
+      { id: "custard-powdered", name: "Custard + Sugar + Powdered Milk", description: "Warm custard served with sugar and powdered milk.", price: 800, image: monday },
+      { id: "custard-hollandia", name: "Custard + Sugar + Hollandia Evaporated Milk", description: "Warm custard served with sugar and Hollandia evaporated milk.", price: 900, image: monday },
+      { id: "custard-peak", name: "Custard + Sugar + Peak Evaporated Milk", description: "Warm custard served with sugar and Peak evaporated milk.", price: 950, image: monday },
     ],
   },
   {
     category: "BREAD",
     icon: "🍞",
-    color: "from-orange-500 to-red-600",
-    accent: "orange",
+    color: "#ea580c",
     items: [
-      {
-        id: "bread-mini",
-        name: "Mini Bread",
-        description: "Fresh mini loaf of soft bread.",
-        price: 200,
-        image:
-          "https://cdn.pixabay.com/photo/2016/03/26/22/18/bread-1281053_640.jpg",
-        imageAlt: "Mini loaf of fresh bread",
-      },
-      {
-        id: "bread-small",
-        name: "Small Bread",
-        description: "Fresh small loaf of soft bread.",
-        price: 400,
-        image:
-          "https://cdn.pixabay.com/photo/2014/07/22/09/59/bread-399286_640.jpg",
-        imageAlt: "Small loaf of fresh bread",
-      },
-      {
-        id: "bread-big",
-        name: "Big Bread",
-        description:
-          "Fresh big loaf of soft bread, perfect for breakfast.",
-        price: 900,
-        image:
-          "https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_640.jpg",
-        imageAlt: "Big loaf of fresh bread",
-      },
+      { id: "bread-mini", name: "Mini Bread", description: "Fresh mini loaf of soft bread.", price: 200, image: Enjoy },
+      { id: "bread-small", name: "Small Bread", description: "Fresh small loaf of soft bread.", price: 400, image: Akp },
+      { id: "bread-big", name: "Big Bread", description: "Fresh big loaf of soft bread, perfect for breakfast.", price: 900, image: Yummy },
     ],
   },
 ];
 
-// ─── BREAKFAST MENU COMPONENT ────────────────────────────────────────────────
 function BreakfastMenu() {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
-  const [imgErrors, setImgErrors] = useState({});
 
   const addToCart = (item, category) => {
     setCart((prev) => {
       const existing = prev.find((c) => c.id === item.id);
       if (existing) {
-        return prev.map((c) =>
-          c.id === item.id ? { ...c, qty: c.qty + 1 } : c
-        );
+        return prev.map((c) => c.id === item.id ? { ...c, qty: c.qty + 1 } : c);
       }
       return [...prev, { ...item, category, qty: 1 }];
     });
@@ -564,9 +419,7 @@ function BreakfastMenu() {
     setCart((prev) => {
       const existing = prev.find((c) => c.id === id);
       if (existing && existing.qty > 1) {
-        return prev.map((c) =>
-          c.id === id ? { ...c, qty: c.qty - 1 } : c
-        );
+        return prev.map((c) => c.id === id ? { ...c, qty: c.qty - 1 } : c);
       }
       return prev.filter((c) => c.id !== id);
     });
@@ -579,35 +432,15 @@ function BreakfastMenu() {
   const totalItems = cart.reduce((sum, c) => sum + c.qty, 0);
   const totalPrice = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
 
-  const handleImgError = (id) => {
-    setImgErrors((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const FallbackImage = ({ name, icon, color }) => (
-    <div
-      className={`flex h-full w-full flex-col items-center justify-center bg-gradient-to-br ${color} p-4`}
-    >
-      <span className="text-5xl">{icon}</span>
-      <p className="mt-2 text-center text-sm font-bold leading-tight text-white">
-        {name}
-      </p>
-    </div>
-  );
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* ── Sticky Header ── */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+    <div style={{ minHeight: "100vh", backgroundColor: "#f9fafb" }}>
+      {/* ── Header ── */}
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
           <div>
-            <h1 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
-              🍳 Breakfast Menu
-            </h1>
-            <p className="text-sm text-gray-500">
-              Fresh, hot and ready — order your favourite breakfast
-            </p>
+            <h1 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">🍳 Breakfast Menu</h1>
+            <p className="text-sm text-gray-500">Fresh, hot and ready — order your favourite breakfast</p>
           </div>
-
           <button
             onClick={() => setShowCart(!showCart)}
             className="relative rounded-2xl bg-gray-900 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-gray-800 active:scale-95"
@@ -625,116 +458,48 @@ function BreakfastMenu() {
       {/* ── Cart Slide-out ── */}
       {showCart && (
         <div className="fixed inset-0 z-50 flex justify-end">
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setShowCart(false)}
-          />
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowCart(false)} />
           <div className="relative z-10 flex h-full w-full max-w-md flex-col bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b px-6 py-4">
-              <h2 className="text-xl font-extrabold text-gray-900">
-                🛒 Your Cart ({totalItems})
-              </h2>
-              <button
-                onClick={() => setShowCart(false)}
-                className="rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200"
-              >
-                ✕
-              </button>
+              <h2 className="text-xl font-extrabold text-gray-900">🛒 Your Cart ({totalItems})</h2>
+              <button onClick={() => setShowCart(false)} className="rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200">✕</button>
             </div>
-
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {cart.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center text-center">
                   <span className="text-6xl">🛒</span>
-                  <p className="mt-4 text-lg font-semibold text-gray-400">
-                    Your cart is empty
-                  </p>
-                  <p className="mt-1 text-sm text-gray-400">
-                    Add some delicious items!
-                  </p>
+                  <p className="mt-4 text-lg font-semibold text-gray-400">Your cart is empty</p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {cart.map((item) => {
-                    const section = BREAKFAST_MENU.find((s) =>
-                      s.items.find((i) => i.id === item.id)
-                    );
-                    return (
-                      <div
-                        key={item.id}
-                        className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-3"
-                      >
-                        <div className="h-16 w-16 overflow-hidden rounded-xl">
-                          {imgErrors[item.id] ? (
-                            <FallbackImage
-                              name={item.name}
-                              icon={section?.icon || "🍽️"}
-                              color={
-                                section?.color || "from-gray-400 to-gray-600"
-                              }
-                            />
-                          ) : (
-                            <img
-                              src={item.image}
-                              alt={item.imageAlt}
-                              className="h-full w-full object-cover"
-                              onError={() => handleImgError(item.id)}
-                            />
-                          )}
-                        </div>
-
-                        <div className="flex-1">
-                          <p className="text-sm font-bold text-gray-900">
-                            {item.name}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {item.category}
-                          </p>
-                          <p className="mt-1 text-sm font-bold text-gray-900">
-                            ₦{(item.price * item.qty).toLocaleString()}
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => removeFromCart(item.id)}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-sm font-bold text-gray-700 hover:bg-gray-300"
-                          >
-                            −
-                          </button>
-                          <span className="w-6 text-center text-sm font-bold">
-                            {item.qty}
-                          </span>
-                          <button
-                            onClick={() => addToCart(item, item.category)}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-sm font-bold text-gray-700 hover:bg-gray-300"
-                          >
-                            +
-                          </button>
-                        </div>
-
-                        <button
-                          onClick={() => deleteFromCart(item.id)}
-                          className="text-red-400 hover:text-red-600"
-                        >
-                          🗑️
-                        </button>
+                  {cart.map((item) => (
+                    <div key={item.id} className="flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-3">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        style={{ width: "64px", height: "64px", objectFit: "cover", borderRadius: "12px", flexShrink: 0 }}
+                      />
+                      <div className="flex-1">
+                        <p className="text-sm font-bold text-gray-900">{item.name}</p>
+                        <p className="text-xs text-gray-500">{item.category}</p>
+                        <p className="mt-1 text-sm font-bold text-gray-900">₦{(item.price * item.qty).toLocaleString()}</p>
                       </div>
-                    );
-                  })}
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => removeFromCart(item.id)} className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-sm font-bold text-gray-700 hover:bg-gray-300">−</button>
+                        <span className="w-6 text-center text-sm font-bold">{item.qty}</span>
+                        <button onClick={() => addToCart(item, item.category)} className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-sm font-bold text-gray-700 hover:bg-gray-300">+</button>
+                      </div>
+                      <button onClick={() => deleteFromCart(item.id)} className="text-red-400 hover:text-red-600">🗑️</button>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
-
             {cart.length > 0 && (
               <div className="border-t bg-white px-6 py-4">
                 <div className="mb-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-gray-900">
-                    Total:
-                  </span>
-                  <span className="text-2xl font-extrabold text-gray-900">
-                    ₦{totalPrice.toLocaleString()}
-                  </span>
+                  <span className="text-lg font-bold text-gray-900">Total:</span>
+                  <span className="text-2xl font-extrabold text-gray-900">₦{totalPrice.toLocaleString()}</span>
                 </div>
                 <button className="w-full rounded-2xl bg-gradient-to-r from-green-500 to-green-700 py-4 text-lg font-bold text-white shadow-lg transition hover:opacity-90 active:scale-95">
                   Checkout — ₦{totalPrice.toLocaleString()}
@@ -750,13 +515,9 @@ function BreakfastMenu() {
         <div className="space-y-14">
           {BREAKFAST_MENU.map((section) => (
             <div key={section.category}>
-              <div
-                className={`mb-6 flex items-center gap-3 rounded-2xl bg-gradient-to-r ${section.color} px-6 py-4 shadow-lg`}
-              >
+              <div className={`mb-6 flex items-center gap-3 rounded-2xl bg-gradient-to-r ${section.color} px-6 py-4 shadow-lg`}>
                 <span className="text-3xl">{section.icon}</span>
-                <h2 className="text-2xl font-extrabold tracking-wide text-white">
-                  {section.category}
-                </h2>
+                <h2 className="text-2xl font-extrabold tracking-wide text-white">{section.category}</h2>
                 <span className="ml-auto rounded-full bg-white/20 px-3 py-1 text-sm font-semibold text-white">
                   {section.items.length} items
                 </span>
@@ -768,87 +529,97 @@ function BreakfastMenu() {
                   return (
                     <div
                       key={item.id}
-                      className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "#ffffff",
+                        borderRadius: "16px",
+                        overflow: "hidden",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+                        border: "1px solid #f3f4f6",
+                      }}
                     >
-                      {/* Product Image */}
-                      <div className="relative h-52 w-full overflow-hidden">
-                        {imgErrors[item.id] ? (
-                          <FallbackImage
-                            name={item.name}
-                            icon={section.icon}
-                            color={section.color}
-                          />
-                        ) : (
-                          <img
-                            src={item.image}
-                            alt={item.imageAlt}
-                            loading="lazy"
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            onError={() => handleImgError(item.id)}
-                          />
-                        )}
+                      {/* ── PRODUCT IMAGE (INLINE STYLES) ── */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "220px",
+                          overflow: "hidden",
+                          position: "relative",
+                          backgroundColor: "#f3f4f6",
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
+                        />
 
                         <div
-                          className={`absolute left-3 top-3 rounded-full bg-gradient-to-r ${section.color} px-3 py-1 text-xs font-bold text-white shadow-md`}
+                          style={{
+                            position: "absolute",
+                            left: "12px",
+                            top: "12px",
+                            padding: "4px 12px",
+                            borderRadius: "999px",
+                            backgroundColor: "rgba(0,0,0,0.6)",
+                            color: "white",
+                            fontSize: "12px",
+                            fontWeight: "bold",
+                          }}
                         >
                           {section.icon} {section.category}
                         </div>
 
                         {inCart && (
-                          <div className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white shadow-md">
+                          <div
+                            style={{
+                              position: "absolute",
+                              right: "12px",
+                              top: "12px",
+                              width: "32px",
+                              height: "32px",
+                              borderRadius: "999px",
+                              backgroundColor: "#10b981",
+                              color: "white",
+                              fontSize: "12px",
+                              fontWeight: "bold",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
                             {inCart.qty}
                           </div>
                         )}
                       </div>
 
-                      {/* Card Body */}
-                      <div className="flex flex-1 flex-col justify-between p-4">
+                      {/* ── Card Body ── */}
+                      <div style={{ padding: "16px", display: "flex", flexDirection: "column", flex: 1, justifyContent: "space-between" }}>
                         <div>
-                          <h3 className="text-lg font-bold text-gray-900">
-                            {item.name}
-                          </h3>
-                          <p className="mt-1 text-sm leading-relaxed text-gray-500">
-                            {item.description}
-                          </p>
+                          <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "#111827" }}>{item.name}</h3>
+                          <p style={{ marginTop: "4px", fontSize: "14px", color: "#6b7280", lineHeight: "1.5" }}>{item.description}</p>
                         </div>
 
-                        <div className="mt-4 flex items-center justify-between">
+                        <div style={{ marginTop: "16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                           <div>
-                            <p className="text-xs font-medium text-gray-400">
-                              Price
-                            </p>
-                            <p className="text-xl font-extrabold text-gray-900">
-                              ₦{item.price.toLocaleString()}
-                            </p>
+                            <p style={{ fontSize: "12px", color: "#9ca3af" }}>Price</p>
+                            <p style={{ fontSize: "20px", fontWeight: "800", color: "#111827" }}>₦{item.price.toLocaleString()}</p>
                           </div>
 
                           {inCart ? (
                             <div className="flex items-center gap-2">
-                              <button
-                                onClick={() => removeFromCart(item.id)}
-                                className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-200 text-lg font-bold text-gray-700 transition hover:bg-gray-300 active:scale-90"
-                              >
-                                −
-                              </button>
-                              <span className="w-6 text-center text-sm font-bold text-gray-900">
-                                {inCart.qty}
-                              </span>
-                              <button
-                                onClick={() =>
-                                  addToCart(item, section.category)
-                                }
-                                className={`flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r ${section.color} text-lg font-bold text-white shadow transition hover:opacity-90 active:scale-90`}
-                              >
-                                +
-                              </button>
+                              <button onClick={() => removeFromCart(item.id)} className="flex h-9 w-9 items-center justify-center rounded-xl bg-gray-200 text-lg font-bold text-gray-700 hover:bg-gray-300 active:scale-90">−</button>
+                              <span className="w-6 text-center text-sm font-bold text-gray-900">{inCart.qty}</span>
+                              <button onClick={() => addToCart(item, section.category)} className={`flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r ${section.color} text-lg font-bold text-white shadow hover:opacity-90 active:scale-90`}>+</button>
                             </div>
                           ) : (
-                            <button
-                              onClick={() =>
-                                addToCart(item, section.category)
-                              }
-                              className={`rounded-xl bg-gradient-to-r ${section.color} px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:opacity-90 active:scale-95`}
-                            >
+                            <button onClick={() => addToCart(item, section.category)} className={`rounded-xl bg-gradient-to-r ${section.color} px-4 py-2 text-sm font-semibold text-white shadow-md hover:opacity-90 active:scale-95`}>
                               Add to Cart
                             </button>
                           )}
@@ -867,7 +638,7 @@ function BreakfastMenu() {
       {totalItems > 0 && !showCart && (
         <button
           onClick={() => setShowCart(true)}
-          className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-2xl bg-gradient-to-r from-green-500 to-green-700 px-6 py-4 text-base font-bold text-white shadow-2xl transition hover:opacity-90 active:scale-95 sm:hidden"
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-2xl bg-gradient-to-r from-green-500 to-green-700 px-6 py-4 text-base font-bold text-white shadow-2xl hover:opacity-90 active:scale-95 sm:hidden"
         >
           🛒 ₦{totalPrice.toLocaleString()}
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-sm font-bold text-green-700">
@@ -879,8 +650,7 @@ function BreakfastMenu() {
   );
 }
 
-
-// ─── Product Section (TEXT-ONLY menu cards) ───────────────────────────────────
+// ─── Product Section (WITH IMAGES) ───────────────────────────────────
 function ProductSection({ cart, setCart }) {
   const addToCart = (item) => setCart((c) => ({
     ...c,
@@ -926,7 +696,7 @@ function ProductSection({ cart, setCart }) {
           </p>
         </motion.div>
 
-        {/* Menu by Category — TEXT ONLY */}
+        {/* Menu by Category — WITH IMAGES */}
         <div className="space-y-14">
           {BREAKFAST_MENU.map((cat, catIdx) => (
             <motion.div
@@ -947,8 +717,8 @@ function ProductSection({ cart, setCart }) {
                 </div>
               </div>
 
-              {/* Text-Only Item Cards */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Product Cards WITH IMAGES */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {cat.items.map((item, i) => {
                   const inCart = cart[item.id]?.qty || 0;
                   return (
@@ -958,71 +728,103 @@ function ProductSection({ cart, setCart }) {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.05 }}
-                      whileHover={{ y: -4 }}
-                      className="group relative bg-white rounded-2xl p-5 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 border border-slate-100 hover:border-slate-200 transition-all duration-300 overflow-hidden"
+                      whileHover={{ y: -6 }}
+                      className="group relative bg-white rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-slate-200/60 border border-slate-100 hover:border-slate-200 transition-all duration-300 overflow-hidden flex flex-col"
                     >
-                      {/* Top accent bar */}
-                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cat.color}`} />
+                      {/* ── PRODUCT IMAGE ── */}
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "220px",
+                          position: "relative",
+                          backgroundColor: "#f3f4f6",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                            transition: "transform 0.5s ease",
+                          }}
+                          className="group-hover:scale-110"
+                        />
 
-                      {/* In-cart badge */}
-                      {inCart > 0 && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-md"
-                        >
-                          {inCart}
-                        </motion.div>
-                      )}
-
-                      {/* Category tag */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className={`inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2 py-1 rounded-md bg-gradient-to-r ${cat.color}`}>
-                          {cat.category}
-                        </span>
-                      </div>
-
-                      {/* Item Name */}
-                      <h4 className="font-bold text-slate-900 text-base leading-snug mb-3 min-h-[3rem]">
-                        {item.name}
-                      </h4>
-
-                      {/* Price */}
-                      <div className="flex items-baseline gap-1 mb-4">
-                        <span className="text-slate-400 text-xs">₦</span>
-                        <span className="text-2xl font-bold text-slate-900">{item.price.toLocaleString()}</span>
-                      </div>
-
-                      {/* Action Buttons */}
-                      {inCart > 0 ? (
-                        <div className="flex items-center justify-between bg-slate-50 rounded-xl p-1.5 border border-slate-200">
-                          <motion.button
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => removeFromCart(item)}
-                            className="w-9 h-9 rounded-lg bg-white text-slate-700 font-bold text-lg shadow-sm border border-slate-200 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all"
-                          >−</motion.button>
-                          <span className="font-bold text-slate-900 text-sm">
-                            {inCart} in cart
-                          </span>
-                          <motion.button
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => addToCart(item)}
-                            className="w-9 h-9 rounded-lg bg-red-600 text-white font-bold text-lg shadow-md hover:bg-red-700 transition-all"
-                          >+</motion.button>
+                        {/* Category tag on image */}
+                        <div className={`absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1.5 rounded-md bg-gradient-to-r ${cat.color} shadow-md`}>
+                          {cat.icon} {cat.category}
                         </div>
-                      ) : (
-                        <motion.button
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={() => addToCart(item)}
-                          className="w-full py-3 rounded-xl bg-slate-900 hover:bg-red-600 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                          </svg>
-                          Add to Cart
-                        </motion.button>
-                      )}
+
+                        {/* In-cart badge */}
+                        {inCart > 0 && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
+                          >
+                            {inCart}
+                          </motion.div>
+                        )}
+
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                      </div>
+
+                      {/* ── CARD BODY ── */}
+                      <div className="p-5 flex flex-col flex-1">
+                        {/* Item Name */}
+                        <h4 className="font-bold text-slate-900 text-base leading-snug mb-2 min-h-[3rem]">
+                          {item.name}
+                        </h4>
+
+                        {/* Description */}
+                        <p className="text-slate-500 text-xs leading-relaxed mb-4 min-h-[2.5rem]">
+                          {item.description}
+                        </p>
+
+                        {/* Price */}
+                        <div className="flex items-baseline gap-1 mb-4">
+                          <span className="text-slate-400 text-xs">₦</span>
+                          <span className="text-2xl font-bold text-slate-900">{item.price.toLocaleString()}</span>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="mt-auto">
+                          {inCart > 0 ? (
+                            <div className="flex items-center justify-between bg-slate-50 rounded-xl p-1.5 border border-slate-200">
+                              <motion.button
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => removeFromCart(item)}
+                                className="w-9 h-9 rounded-lg bg-white text-slate-700 font-bold text-lg shadow-sm border border-slate-200 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all"
+                              >−</motion.button>
+                              <span className="font-bold text-slate-900 text-sm">
+                                {inCart} in cart
+                              </span>
+                              <motion.button
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => addToCart(item)}
+                                className="w-9 h-9 rounded-lg bg-red-600 text-white font-bold text-lg shadow-md hover:bg-red-700 transition-all"
+                              >+</motion.button>
+                            </div>
+                          ) : (
+                            <motion.button
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => addToCart(item)}
+                              className="w-full py-3 rounded-xl bg-slate-900 hover:bg-red-600 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                              Add to Cart
+                            </motion.button>
+                          )}
+                        </div>
+                      </div>
                     </motion.div>
                   );
                 })}
